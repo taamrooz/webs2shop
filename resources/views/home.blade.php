@@ -2,6 +2,8 @@
 
 @section('content')
 
-<h1>Hello world</h1>
+    <div class="row home">
+        <h1>Hello world</h1>
+    </div>
 
 @endsection
