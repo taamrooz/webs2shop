@@ -17,18 +17,18 @@
     <body>
         <!--Insert header here-->
         <header>
-            <nav class="navbar">
+            <nav class="navbar" id="navbar">
                 <ul>
                     <li id="escapeHatch">
                         <a href="{{ public_path() }}/">
-                            <div>
-                                <img src="{{ asset('img/sigil.svg') }}" alt="Home" heigt="40px" width="40">
-                            </div>
+                            <img src="{{ asset('img/sigil.svg') }}" alt="Home">
+                            <span>Webshopnaam</span>
                         </a>
                     </li>
                     <li>Producten</li>
                     <li>Winkelwagen</li>
                     <li>Inloggen</li>
+                    <li id="toggleMenu" onclick="toggleMenu()">&#9776;</li>
                 </ul>
             </nav>
         </header>
@@ -56,5 +56,16 @@
                 <p class="colofon">Privacy policy - &copy; {{ date('Y') }}</p>
             </footer>
         </div>
+
+        <script>
+            function toggleMenu(){
+                var x = document.getElementById("navbar");
+                if (x.className === "navbar") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "navbar";
+                }
+            }
+        </script>
     </body>
 </html>

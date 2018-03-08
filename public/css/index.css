@@ -16,11 +16,17 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Variables */
 :root{
     --centerWith: 100%;
     --navbarDir: column;
     --centerMargin: 0;
+    --navHeight: 36px;
     --h1Size: 1em;
 }
 
@@ -42,7 +48,6 @@ body {
 @media(min-width: 961px){
     :root{
         --centerWith: 929px;
-        --navbarDir: row;
         --h1Size: 1.5em;
     }
 }
@@ -54,12 +59,21 @@ body {
         --navbarDir: row;
         --h1Size: 1.5em;
     }
+
+    .navbar > ul > li:not(:first-child) {
+        display: block!important;
+    }
+
+    #toggleMenu {
+        display: none!important;
+    }
 }
 
 /* Mobile L */
 @media(min-width: 481px){
     :root{
         --h1Size: 1.2em;
+        --navHeight: 43px;
     }
 }
 
@@ -71,9 +85,20 @@ body {
 
 /* Nav */
 .navbar {
+    position: fixed;
+    width: 100%;
     background-color: green;
     display: flex;
     font-size: var(--h1Size);
+    overflow: hidden;
+}
+
+.navbar > ul > li:not(:first-child) {
+    display: none;
+}
+
+.responsive > ul > li{
+    display: block!important;
 }
 
 .navbar > ul {
@@ -93,8 +118,21 @@ body {
     flex: 4;
 }
 
+#escapeHatch a img , #escapeHatch a span {
+    height: var(--h1Size);
+    vertical-align: middle;
+}
+
+#toggleMenu {
+    display: block;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
 /* Content */
 .centerContent {
+    padding-top: var(--navHeight);
     display: flex;
     flex-direction: column;
     background-color: blue;
