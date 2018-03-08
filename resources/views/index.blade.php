@@ -7,6 +7,9 @@
 
         <title>Laravel</title>
 
+        {{-- JQuery --}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
@@ -15,7 +18,6 @@
 
     </head>
     <body>
-        <!--Insert header here-->
         <header>
             <nav class="navbar" id="navbar">
                 <ul>
@@ -28,15 +30,20 @@
                     <li>Producten</li>
                     <li>Winkelwagen</li>
                     <li>Inloggen</li>
-                    <li id="toggleMenu" onclick="toggleMenu()">&#9776;</li>
                 </ul>
             </nav>
         </header>
 
+
+        <input type="checkbox" name="toggleMenuInput" id="toggleMenuInput"/>
+        <div class="menuOpenedBackground"></div>
+        <label for="toggleMenuInput" id="toggleMenu">&#9776;</label>
+
+
         <div class="centerContent">
-
-            @yield('content')
-
+            <div class="content">
+                @yield('content')
+            </div>
             <footer class="row footer">
                 <div class="footerContent">
                     <ul>
@@ -59,14 +66,32 @@
         </div>
 
         <script>
-            function toggleMenu(){
+
+            $(document).ready(function(){
+
                 var x = document.getElementById("navbar");
-                if (x.className === "navbar") {
-                    x.className += " responsive";
-                } else {
-                    x.className = "navbar";
-                }
-            }
+
+                $(window).resize(function() {
+
+                    if ($(window).width() > 641) {
+
+                        $('input[name=toggleMenuInput]').prop('checked', false);
+                        x.className = "navbar";
+
+                    }else{
+
+                        if($('input[name=toggleMenuInput]').is(':checked')){
+
+                            x.className += " menuOpened";
+
+                        }else{
+
+                            x.className = "navbar";
+
+                        }
+                    }
+                });
+            });
         </script>
     </body>
 </html>

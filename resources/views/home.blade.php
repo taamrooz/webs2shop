@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="row home">
+    <div class="row">
         <h1>Hello world</h1>
     </div>
 
