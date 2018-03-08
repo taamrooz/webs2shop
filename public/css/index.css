@@ -185,7 +185,7 @@ a {
 
 .content {
     background-color: orange;
-    width: 100%;
+    width: var(--centerWidth);
     flex-grow: 1;
     min-height: fit-content;
 }
