@@ -22,7 +22,7 @@
                     <li id="escapeHatch">
                         <a href="{{ public_path() }}/">
                             <img src="{{ asset('img/sigil.svg') }}" alt="Home">
-                            <span>Webshopnaam</span>
+                            <span><b>Webshopnaam</b></span>
                         </a>
                     </li>
                     <li>Producten</li>
@@ -34,6 +34,7 @@
         </header>
 
         <div class="centerContent">
+
             @yield('content')
 
             <footer class="row footer">
@@ -53,7 +54,7 @@
                         </li>
                     </ul>
                 </div>
-                <p class="colofon">Privacy policy - &copy; {{ date('Y') }}</p>
+                <p class="colofon">Made by: Tom Roozen and Jan ten Haaf - &copy; {{ date('Y') }}</p>
             </footer>
         </div>
 

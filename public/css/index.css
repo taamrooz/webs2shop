@@ -3,7 +3,6 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
 
 html, body {
     height: 100%;
-    overflow-y: scroll;
 }
 
 /* Main */
@@ -23,7 +22,7 @@ a{
 
 /* Variables */
 :root{
-    --centerWith: 100%;
+    --centerWidth: 100%;
     --navbarDir: column;
     --centerMargin: 0;
     --navHeight: 36px;
@@ -33,21 +32,21 @@ a{
 /* Desktop */
 @media(min-width: 1281px){
     :root{
-        --centerWith: 1025px;
+        --centerWidth: 1025px;
     }
 }
 
 /* Laptop */
 @media(min-width: 1025px){
     :root{
-        --centerWith: 961px;
+        --centerWidth: 961px;
     }
 }
 
 /* Tablet L */
 @media(min-width: 961px){
     :root{
-        --centerWith: 929px;
+        --centerWidth: 929px;
         --h1Size: 1.5em;
     }
 }
@@ -94,7 +93,7 @@ a{
 }
 
 .navbar > ul > li:not(:first-child) {
-    display: none;
+    left: 1000px;
 }
 
 .responsive > ul > li{
@@ -137,20 +136,21 @@ a{
     flex-direction: column;
     background-color: blue;
     align-items: center;
-    min-height: fit-content;
+    overflow: auto;
+    min-height: 100vh;
+    justify-content: space-between;
 }
 
 .row {
-    width: var(--centerWith);
+    width: var(--centerWidth);
     display: flex;
     justify-content: center;
     min-height: 50px;
     background: red;
 }
 
-/* Home */
 .home {
-    min-height: 400px;
+    flex-grow: 1;
 }
 
 /* Footer */
