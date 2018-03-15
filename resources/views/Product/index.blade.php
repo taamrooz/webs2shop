@@ -1,7 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jan
- * Date: 12-3-2018
- * Time: 20:03
- */
+@extends('index')
+
+@section('content')
+
+    <div class="row">
+        <h1>Producten</h1>
+    </div>
+
+@endsection

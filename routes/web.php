@@ -11,6 +11,10 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/producten', 'ProductController@index');
+Route::get('/producten/{product}', 'ProductController@show');

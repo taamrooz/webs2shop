@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>ONKRUID KOPEN</title>
 
         {{-- JQuery --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,58 +18,91 @@
 
     </head>
     <body>
-        <header>
-            <nav class="navbar" id="navbar">
-                <ul>
-                    <li id="escapeHatch">
-                        <a href="{{ public_path() }}/">
-                            <img src="{{ asset('img/sigil.svg') }}" alt="Home">
-                            <span><b>Webshopnaam</b></span>
-                        </a>
-                    </li>
-                    <li>Producten</li>
-                    <li>Winkelwagen</li>
-                    <li>Inloggen</li>
-                </ul>
-            </nav>
-        </header>
 
+        {{-- Blurry layer --}}
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+            <defs>
+                <filter id="blur-filter">
+                    <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+                </filter>
+            </defs>
+        </svg>
 
+        {{-- Hamburger menu toggle --}}
+        <label for="toggleMenuInput" id="toggleMenu" onclick="toggleBlur()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
         <input type="checkbox" name="toggleMenuInput" id="toggleMenuInput"/>
-        <div class="menuOpenedBackground"></div>
-        <label for="toggleMenuInput" id="toggleMenu">&#9776;</label>
 
-
-        <div class="centerContent">
-            <div class="content">
-                @yield('content')
-            </div>
-            <footer class="row footer">
-                <div class="footerContent">
-                    <ul>
-                        <li>
-                            <h3>Media</h3>
-                            <p></p>
-                        </li>
-                        <li>
-                            <h3>Nieuwsbrief</h3>
-                            <button href="#">Meld je aan!</button>
-                        </li>
-                        <li>
-                            <h3>Over ons</h3>
-                            <p>Wij zijn een webshop die graag onkruid verkoopt aan jou!</p>
-                        </li>
-                    </ul>
-                </div>
-                <p class="colofon">Made by: Tom Roozen and Jan ten Haaf - &copy; {{ date('Y') }}</p>
-            </footer>
+        {{-- Menu in sidebar --}}
+        <div class="sideBar">
+            <ul>
+                <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
+                <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen" >Winkelwagen</a></li>
+                <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
+            </ul>
         </div>
 
+        {{-- Everything at z-index 0 --}}
+        <div id="blur">
+
+            {{-- Navbar --}}
+            <header>
+                <nav class="navbar" id="navbar">
+                    <ul>
+                        <li id="escapeHatch">
+                            <a href="/">
+                                <img src="{{ asset('img/sigil.svg') }}" alt="Home">
+                                <span><b>Webshopnaam</b></span>
+                            </a>
+                        </li>
+                        <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
+                        <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
+                        <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <div class="centerContent">
+
+                {{-- Mainstage --}}
+                <div class="content">
+                    @yield('content')
+                </div>
+
+                {{-- Footer --}}
+                <footer class="row footer">
+                    <div class="footerContent">
+                        <ul>
+                            <li>
+                                <h3>Media</h3>
+                                <p></p>
+                            </li>
+                            <li>
+                                <h3>Nieuwsbrief</h3>
+                                <button href="#">Meld je aan!</button>
+                            </li>
+                            <li>
+                                <h3>Over ons</h3>
+                                <p>Wij zijn een webshop die graag onkruid verkoopt aan jou!</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="colofon">Made by: Tom Roozen and Jan ten Haaf - &copy; {{ date('Y') }}</p>
+                </footer>
+            </div>
+        </div>
+
+        {{-- Scripts --}}
         <script>
 
             $(document).ready(function(){
 
                 var x = document.getElementById("navbar");
+                var blur = document.getElementById("blur");
 
                 $(window).resize(function() {
 
@@ -77,6 +110,7 @@
 
                         $('input[name=toggleMenuInput]').prop('checked', false);
                         x.className = "navbar";
+                        blur.className = "";
 
                     }else{
 
@@ -91,7 +125,20 @@
                         }
                     }
                 });
+
+                $('#toggleMenu').click(function(){
+                    $(this).toggleClass('open');
+                });
             });
+
+            function toggleBlur() {
+                var blur = document.getElementById("blur");
+                if (blur.className === "blur") {
+                    blur.className = "";
+                } else {
+                    blur.className = "blur";
+                }
+            }
         </script>
     </body>
 </html>
