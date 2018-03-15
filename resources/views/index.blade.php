@@ -26,7 +26,7 @@
                             </div>
                         </a>
                     </li>
-                    <li>Producten</li>
+                    <li><a class="no-decoration" href="{{ URL::to('/products') }}">Producten</a></li>
                     <li>Winkelwagen</li>
                     <li>Inloggen</li>
                 </ul>
@@ -34,7 +34,21 @@
         </header>
 
         <div class="centerContent">
-            @yield('content')
+            @if(Session::has('msg'))
+                <div class="alert alert-success">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>Success!</strong> {!!Session::get('msg')!!}
+                </div>
+            @endif
+            @if(Session::has('warning'))
+                <div class="alert alert-warning">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <strong>Warning!</strong> {!!Session::get('warning')!!}
+                </div>
+            @endif
+            <div class="row">
+                @yield('content')
+            </div>
 
             <footer class="row footer">
                 <div class="footerContent">

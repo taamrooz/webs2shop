@@ -14,5 +14,5 @@
 Route::get('/', function () {
     return view('home');
 });
-
+Route::post('products/delete', 'ProductController@destroy');
 Route::resource('products','ProductController');
