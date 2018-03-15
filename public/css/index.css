@@ -150,3 +150,8 @@ body {
 .footer > .colofon {
     background-color: green;
 }
+
+.no-decoration, .no-decoration:link, .no-decoration:hover {
+    text-decoration: none;
+    color: inherit;
+}
