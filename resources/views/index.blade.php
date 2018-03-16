@@ -70,6 +70,22 @@
 
                 {{-- Mainstage --}}
                 <div class="content">
+
+                    {{-- Feedback messages --}}
+                    @if(Session::has('msg'))
+                        <div class="alert alert-success">
+                            <a class="close" data-dismiss="alert">×</a>
+                            <strong>Success!</strong> {!!Session::get('msg')!!}
+                        </div>
+                    @endif
+
+                    @if(Session::has('warning'))
+                        <div class="alert alert-warning">
+                            <a class="close" data-dismiss="alert">×</a>
+                            <strong>Warning!</strong> {!!Session::get('warning')!!}
+                        </div>
+                    @endif
+
                     @yield('content')
                 </div>
 
@@ -104,6 +120,7 @@
                 var x = document.getElementById("navbar");
                 var blur = document.getElementById("blur");
 
+                /* Check window width to retract the sidebar */
                 $(window).resize(function() {
 
                     if ($(window).width() > 641) {
@@ -126,9 +143,22 @@
                     }
                 });
 
+
+
+
+
+                // TODO fix bug met hamburger, mag niet terug springen op kruisje wanneer terug naar kleiner dan 641px
+
+
+
+
+
+
+                /* Toggle the hamburger animation */
                 $('#toggleMenu').click(function(){
                     $(this).toggleClass('open');
                 });
+
 
                 /* Disable scroll on main page, so the sidebar can be scrolled */
                 $('.disable_scroll_main_page').bind('mousewheel DOMMouseScroll', function(e) {
@@ -148,6 +178,7 @@
                 });
             });
 
+            /* Toggle the background blur */
             function toggleBlur() {
                 var blur = document.getElementById("blur");
                 if (blur.className === "blur") {
