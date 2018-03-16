@@ -30,9 +30,14 @@ a {
 }
 
 /* Nav */
+header {
+    justify-content: center;
+    display: flex;
+}
+
 .navbar {
+    width: var(--centerWidth);
     position: fixed;
-    width: 100%;
     background-color: green;
     display: flex;
     font-size: var(--h1Size);
@@ -220,7 +225,6 @@ a {
     width: var(--centerWidth);
     display: flex;
     justify-content: center;
-    background: red;
 }
 
 .content {

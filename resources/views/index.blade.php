@@ -38,7 +38,7 @@
         <input type="checkbox" name="toggleMenuInput" id="toggleMenuInput"/>
 
         {{-- Menu in sidebar --}}
-        <div class="sideBar">
+        <div class="sideBar disable_scroll_main_page">
             <ul>
                 <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                 <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen" >Winkelwagen</a></li>
@@ -51,7 +51,7 @@
 
             {{-- Navbar --}}
             <header>
-                <nav class="navbar" id="navbar">
+                <nav class="navbar row" id="navbar">
                     <ul>
                         <li id="escapeHatch">
                             <a href="/">
@@ -128,6 +128,23 @@
 
                 $('#toggleMenu').click(function(){
                     $(this).toggleClass('open');
+                });
+
+                /* Disable scroll on main page, so the sidebar can be scrolled */
+                $('.disable_scroll_main_page').bind('mousewheel DOMMouseScroll', function(e) {
+                    var scrollTo = null;
+
+                    if (e.type == 'mousewheel') {
+                        scrollTo = (e.originalEvent.wheelDelta * -1);
+                    }
+                    else if (e.type == 'DOMMouseScroll') {
+                        scrollTo = 40 * e.originalEvent.detail;
+                    }
+
+                    if (scrollTo) {
+                        e.preventDefault();
+                        $(this).scrollTop(scrollTo + $(this).scrollTop());
+                    }
                 });
             });
 
