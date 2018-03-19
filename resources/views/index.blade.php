@@ -56,7 +56,7 @@
                         <li id="escapeHatch">
                             <a href="/">
                                 <img src="{{ asset('img/sigil.svg') }}" alt="Home">
-                                <span><b>De rotte plant</b></span>
+                                <span><b>Ackerwildkrauter</b></span>
                             </a>
                         </li>
                         <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
