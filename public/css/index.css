@@ -1,24 +1,6 @@
 /*CSS RESET*/
 html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,iframe,hr,h1,h2,h3,h4,h5,h6{margin:0;padding:0}ul{list-style:none}button,input,select,textarea{margin:0}html{box-sizing:border-box}*{box-sizing:inherit}*:before,*:after{box-sizing:inherit}img,embed,object,audio,video{height:auto;max-width:100%}iframe{border:0}table{border-collapse:collapse;border-spacing:0}td,th{padding:0;text-align:left}
 
-html, body {
-    height: 100%;
-}
-
-/* Main */
-@import url('https://fonts.googleapis.com/css?family=Raleway');
-
-body {
-    background: white;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Raleway', sans-serif;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
 
 /* Variables */
 :root {
@@ -28,17 +10,52 @@ a {
     --navHeight: 36px;
     --h1Size: 1em;
     --productCardWidth: 95%;
+    --dark: #262526;
+    --light: #FCFCFC;
+    --red: #C44741;
+}
+
+/* Main */
+html, body {
+    min-height: 100%;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+    background: rgba(240,240,240,1);
+    background: -moz-linear-gradient(top, rgba(240,240,240,1) 0%, rgba(250,250,250,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(240,240,240,1)), color-stop(100%, rgba(250,250,250,1)));
+    background: -webkit-linear-gradient(top, rgba(240,240,240,1) 0%, rgba(250,250,250,1) 100%);
+    background: -o-linear-gradient(top, rgba(240,240,240,1) 0%, rgba(250,250,250,1) 100%);
+    background: -ms-linear-gradient(top, rgba(240,240,240,1) 0%, rgba(250,250,250,1) 100%);
+    background: linear-gradient(to bottom, rgba(240,240,240,1) 0%, rgba(250,250,250,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#fafafa', GradientType=0 );
+    display: flex;
+    flex-direction: column;
+    font-family: 'Raleway', sans-serif;
+    color: var(--dark);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Nav */
 header {
+    background-color: var(--light);
+    width: 100vw;
+    position: fixed;
     justify-content: center;
     display: flex;
+    -webkit-box-shadow: 0px -10px 10px 10px rgba(0,0,0,0.34);
+    -moz-box-shadow: 0px -10px 10px 10px rgba(0,0,0,0.34);
+    box-shadow: 0px -10px 10px 10px rgba(0,0,0,0.34);
 }
 
 .navbar {
-    position: fixed;
-    background-color: green;
+    background-color: inherit;
     font-size: var(--h1Size);
     overflow: hidden;
 }
@@ -47,13 +64,6 @@ header {
     display: none;
 }
 
-.menuOpened > ul > li:not(:first-child){
-    display: block!important;
-    z-index: 10;
-    position: fixed;
-    top: 100px;
-    left: 100px;
-}
 
 .navbar > ul {
     display: flex;
@@ -64,8 +74,13 @@ header {
 }
 
 .navbar > ul >li {
-    flex: 1;
     padding: 0.5em;
+}
+
+.navbar .active {
+    -webkit-box-shadow: inset 0px -3px 0px 0px var(--red);
+    -moz-box-shadow: inset 0px -3px 0px 0px var(--red);
+    box-shadow: inset 0px -3px 0px 0px var(--red);
 }
 
 .sideBar {
@@ -214,7 +229,6 @@ header {
     padding-top: var(--navHeight);
     display: flex;
     flex-direction: column;
-    background-color: blue;
     align-items: center;
     min-height: 100vh;
     justify-content: space-between;
@@ -227,10 +241,10 @@ header {
 }
 
 .content {
-    background-color: orange;
     width: var(--centerWidth);
     flex-grow: 1;
     min-height: fit-content;
+    margin-top: 20px;
 }
 
 .card {
@@ -238,7 +252,7 @@ header {
     -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.5);
-    background-color: #fff;
+    background-color: var(--light);
 }
 
 .products {
@@ -261,39 +275,36 @@ header {
 }
 
 /* Footer */
-.footer {
+footer {
+    margin-top: 20px;
     flex-direction: column;
-    background-color: yellow;
+    background-color: var(--dark);
+    min-height: fit-content;
+    width: 100%!important;
+    color: var(--light);
+}
+
+footer .footerContent {
     min-height: fit-content;
 }
 
-.footer .footerContent {
-    clear: both;
-    min-height: fit-content;
-}
-
-.footer .footerContent, .footer .colofon {
+footer .footerContent, footer .colofon {
+    margin: auto;
     display: flex;
     justify-content: center;
     padding: 2em;
 }
 
-.footer > .footerContent > ul {
+footer > .footerContent > ul {
     width: 100%;
     display: flex;
     justify-content: space-around;
     flex-direction: var(--navbarDir);
 }
 
-.footer > .footerContent > ul > li {
-    background-color: darkblue;
+footer > .footerContent > ul > li {
     text-align: center;
     padding: 1em;
-    color: white;
-}
-
-.footer > .colofon {
-    background-color: green;
 }
 
 

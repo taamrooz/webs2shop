@@ -56,7 +56,7 @@
                         <li id="escapeHatch">
                             <a href="/">
                                 <img src="{{ asset('img/sigil.svg') }}" alt="Home">
-                                <span><b>Webshopnaam</b></span>
+                                <span><b>De rotte plant</b></span>
                             </a>
                         </li>
                         <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
@@ -90,8 +90,8 @@
                 </div>
 
                 {{-- Footer --}}
-                <footer class="row footer">
-                    <div class="footerContent">
+                <footer class="footer">
+                    <div class="row footerContent">
                         <ul>
                             <li>
                                 <h3>Media</h3>
@@ -119,6 +119,7 @@
 
                 var x = document.getElementById("navbar");
                 var blur = document.getElementById("blur");
+                var hamburger = document.getElementById("toggleMenu");
 
                 /* Check window width to retract the sidebar */
                 $(window).resize(function() {
@@ -126,20 +127,14 @@
                     if ($(window).width() > 641) {
 
                         $('input[name=toggleMenuInput]').prop('checked', false);
-                        x.className = "navbar";
+                        x.className = "navbar row";
                         blur.className = "";
+                        hamburger.className = "";
 
                     }else{
 
-                        if($('input[name=toggleMenuInput]').is(':checked')){
+                        x.className = "navbar row";
 
-                            x.className += " menuOpened";
-
-                        }else{
-
-                            x.className = "navbar";
-
-                        }
                     }
                 });
 
