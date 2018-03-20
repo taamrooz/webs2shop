@@ -3,18 +3,27 @@
 	<div class="catalogus">
 		<div class="filter card">
 			<div class="filter_header">
-				<h3>Filterkes</h3>
+				<h3>Filter</h3>
 				<img src="{{ asset('img/sort.svg') }}" alt="Sorteren">
 			</div>
 			<div class="search">
 				<input type="text" width="100%" placeholder="Zoeken">
 			</div>
 			<div class="filters">
-				<ul>
-					<li>Kleur</li>
-					<li>Soort</li>
-					<li>Grootte</li>
-				</ul>
+				<div>
+				<h4>Categorieën</h4>
+					<ul>
+					<?php
+                        $categories[] = array();
+						foreach($products as $product) {
+							if(!in_array($product->categorie, $categories)) {
+							    echo "<li><input type='checkbox' name='".$product->categorie."' id='".$product->categorie."'><label for='".$product->categorie."'>".$product->categorie."</label></li>";
+							    $categories[] = $product->categorie;
+							}
+						}
+					?>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="products">
