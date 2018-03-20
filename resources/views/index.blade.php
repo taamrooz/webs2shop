@@ -99,7 +99,7 @@
                             </li>
                             <li>
                                 <h3>Nieuwsbrief</h3>
-                                <button href="#">Meld je aan!</button>
+                                <button href="#" class="btn">Meld je aan!</button>
                             </li>
                             <li>
                                 <h3>Over ons</h3>

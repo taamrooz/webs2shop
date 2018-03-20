@@ -9,21 +9,19 @@
 			<div class="search">
 				<input type="text" width="100%" placeholder="Zoeken">
 			</div>
-			<div class="filters">
-				<div>
+			<div class="categories">
 				<h4>Categorieën</h4>
-					<ul>
-					<?php
-                        $categories[] = array();
-						foreach($products as $product) {
-							if(!in_array($product->categorie, $categories)) {
-							    echo "<li><input type='checkbox' name='".$product->categorie."' id='".$product->categorie."'><label for='".$product->categorie."'>".$product->categorie."</label></li>";
-							    $categories[] = $product->categorie;
-							}
+				<ul>
+				<?php
+					$categories[] = array();
+					foreach($products as $product) {
+						if(!in_array($product->categorie, $categories)) {
+							echo "<li><label for='".$product->categorie."'><input type='checkbox' name='".$product->categorie."' id='".$product->categorie."'> ".$product->categorie."</label></li>";
+							$categories[] = $product->categorie;
 						}
-					?>
-					</ul>
-				</div>
+					}
+				?>
+				</ul>
 			</div>
 		</div>
 		<div class="products">
