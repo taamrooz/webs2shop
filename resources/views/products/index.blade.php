@@ -1,53 +1,87 @@
-@extends('layouts.productindex')
+@extends('index')
 @section('content')
-@foreach($products as $product)
-<div class="col-md-3">
-	<div class="card mb-4 box-shadow">
-		<img class="card-img" src="http://via.placeholder.com/350x225" alt="Card image cap">
-		<div class="card-body">
-			<h3>{{$product->title}}</h3>
-			<p class="card-text">{{$product->beschrijving}}</p>
-			<div class="d-flex justify-content-between align-items-center">
-				<div class="btn-group">
-					<a href="{{ URL::to('products/' . $product->id) }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-					<a href="{{ URL::to('products/' . $product->id . '/edit') }}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-					<form method="post" action="products/delete" id="{{ $product->id }}" class="btn-group">
-						{{ csrf_field()}}
-						<input type="hidden" name="id" value="{{ $product->id }}">
-						<button type="button" class="btn btn-sm btn-outline-danger delete-button" data-id="{{ $product->id }}">Verwijder</button>
-					</form>
-				</div>
+	<div class="catalogus">
+		<div class="filter card">
+			<div class="filter_header">
+				<h3>Filterkes</h3>
+				<img src="{{ asset('img/sort.svg') }}" alt="Sorteren">
+			</div>
+			<div class="search">
+				<input type="text" width="100%" placeholder="Zoeken">
+			</div>
+			<div class="filters">
+				<ul>
+					<li>Kleur</li>
+					<li>Soort</li>
+					<li>Grootte</li>
+				</ul>
 			</div>
 		</div>
+		<div class="products">
+			@foreach($products as $product)
+				<?php
+				$short = substr($product->beschrijving, 0, 93)."...";
+				?>
+
+				<div class="card product">
+					<img class="card-img" src="http://via.placeholder.com/350x225" alt="{{ $product->titel }}">
+					<h3>{{ $product->titel }}</h3>
+					<p>{{ $short }}</p>
+					<div class="product_options">
+						<a class="inspect btn" href="{{ URL::to('/producten/'.$product->id ) }}">Bekijk</a>
+					</div>
+				</div>
+				{{--<div class="col-md-3">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img" src="http://via.placeholder.com/350x225" alt="Card image cap">
+                        <div class="card-body">
+                            <h3>{{$product->title}}</h3>
+                            <p class="card-text">{{$product->beschrijving}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ URL::to('products/' . $product->id) }}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                                    <a href="{{ URL::to('products/' . $product->id . '/edit') }}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                                    <form method="post" action="products/delete" id="{{ $product->id }}" class="btn-group">
+                                        {{ csrf_field()}}
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-button" data-id="{{ $product->id }}">Verwijder</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>--}}
+			@endforeach
+		</div>
 	</div>
-</div>
-@endforeach
-<script>
-	$(document).on('click', '.delete-button', function (e) {
 
-		e.preventDefault();
 
-		var id = $(this).data('id');
+	<script>
+		$(document).on('click', '.delete-button', function (e) {
 
-		swal({
+			e.preventDefault();
 
-			title: "Weet je het zeker?",
-			icon: "warning",
-			buttons: {
-				cancel: true,
-				confirm: true,
-			}
+			var id = $(this).data('id');
 
-		}).then(okay => {
+			swal({
 
-			if(okay) {
-                    // Delete module
-                    $('#' + id).submit();
-                }
-                // Cancel
-                return;
+				title: "Weet je het zeker?",
+				icon: "warning",
+				buttons: {
+					cancel: true,
+					confirm: true,
+				}
 
-            });
-	});
-</script>
+			}).then(okay => {
+
+				if(okay) {
+						// Delete module
+						$('#' + id).submit();
+					}
+					// Cancel
+					return;
+
+				});
+		});
+	</script>
 @endsection

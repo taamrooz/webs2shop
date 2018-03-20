@@ -11,8 +11,12 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/producten', 'ProductController@index');
+Route::get('/producten/{product}', 'ProductController@show');
 Route::post('products/delete', 'ProductController@destroy');
 Route::resource('products','ProductController');

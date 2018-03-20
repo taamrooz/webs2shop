@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('titel');
             $table->text('beschrijving');
-            $table->double('prijs');
+            $table->decimal('prijs', 5, 2);
             $table->timestamps();
         });
     }
