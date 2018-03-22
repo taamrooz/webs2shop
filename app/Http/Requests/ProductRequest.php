@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'titel' => 'required|string|max:40',
             'beschrijving' => 'required|string|max:2000',
-            'prijs' => 'nullable|integer',
+            'prijs' => 'required|numeric',
         ];
     }
     public function messages()
@@ -43,7 +43,8 @@ class ProductRequest extends FormRequest
             'beschrijving.max' => 'De :attribute mag niet langer zijn dan :max karakters.',
 
             //Prijs messages
-            'prijs.integer' => 'De :attribute mag alleen bestaan uit cijfers.'
+            'prijs.required' => 'Je moet een :attribute meegeven',
+            'prijs.numeric' => 'De :attribute mag alleen bestaan uit cijfers.'
         ];
     }
 }
