@@ -11,6 +11,14 @@
 			</div>
 			<div class="filters">
 				<div>
+					<h5>Prijs</h5>
+					<div class="">
+						<div class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+							<div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 50%;"></div>
+							<span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span>
+							<span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 50%;"></span>
+						</div>
+					</div>
 				<h4>Categorieën</h4>
 					<ul>
 					<?php

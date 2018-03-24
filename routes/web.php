@@ -35,3 +35,7 @@ Route::group(['prefix' => '/admin'], function() {
 //Route::resource('producten','ProductController');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

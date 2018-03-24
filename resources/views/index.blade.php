@@ -42,7 +42,7 @@
             <ul>
                 <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                 <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen" >Winkelwagen</a></li>
-                <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
+                <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/login">Inloggen</a></li>
             </ul>
         </div>
 
@@ -61,7 +61,7 @@
                         </li>
                         <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                         <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
-                        <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
+                        <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/login">Inloggen</a></li>
                     </ul>
                 </nav>
             </header>
