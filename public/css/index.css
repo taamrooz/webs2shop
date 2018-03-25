@@ -13,8 +13,10 @@ html,body,p,ol,ul,li,dl,dt,dd,blockquote,figure,fieldset,legend,textarea,pre,ifr
     --dark: #262526;
     --light: #FCFCFC;
     --red: #C44741;
+    --redHover: rgba(196, 71, 65, 0.85);
     --grey: #E5E1D1;
     --e: #8C8979;
+    --errorWhite: rgba(196, 71, 65, 0.15);
     --productsGrowth: 2;
 }
 
@@ -346,7 +348,49 @@ header {
 }
 
 .product_options *:hover {
-    background-color: rgba(196, 71, 65, 0.85);
+    background-color: var(--redHover);
+}
+
+/* login page */
+.login {
+    align-self: center;
+    width: 300px;
+    padding: 20px;
+}
+
+.login h3 {
+    margin: auto;
+    width: fit-content;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login form * {
+    margin: 10px 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid var(--grey);
+    padding: 10px;
+    width: 100%;
+}
+
+.login .invalid-feedback {
+    background-color: var(--errorWhite);
+    padding: 3px;
+}
+
+.login .btn {
+    background-color: var(--red);
+    transition: 0.3s;
+    color: var(--light);
+}
+
+.login .btn:hover {
+    background-color: var(--redHover);
 }
 
 /* Footer */
@@ -427,7 +471,7 @@ footer > .footerContent > ul > li {
 }
 
 /* Tablet Portrait */
-@media(min-width: 641px){
+@media(min-width: 671px){
     :root {
         --centerMargin: 1em;
         --navbarDir: row;

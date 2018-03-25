@@ -20,3 +20,9 @@ Route::get('/producten', 'ProductController@index');
 Route::get('/producten/{product}', 'ProductController@show');
 Route::post('products/delete', 'ProductController@destroy');
 Route::resource('products','ProductController');
+
+Route::get('/registreren', 'RegistrationController@create');
+Route::post('/registreren', 'RegistrationController@store');
+
+Route::get('/inloggen', 'SessionsController@create');
+/*Auth::routes();*/

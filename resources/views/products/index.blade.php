@@ -23,6 +23,11 @@
 				?>
 				</ul>
 			</div>
+            <div class="price">
+                <h4>Prijs</h4>
+                <input type="text" name="min_price" id="min_price">
+                <input type="text" name="php artisan max_price" id="max_price">
+            </div>
 		</div>
 		<div class="products">
 			@foreach($products as $product)
