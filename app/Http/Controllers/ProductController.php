@@ -83,7 +83,7 @@ class ProductController extends Controller
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
         $product->save();
-        Session::flash('msg', 'Product aangemaakt!');
+        Session::flash('msg', 'Product geüpdatet!');
         return Redirect::to('/');
     }
 
