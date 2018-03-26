@@ -16,28 +16,26 @@ Route::get('/', function () {
 	return view('home');
 });
 
+Route::resource('producten','ProductController');
 Route::get('/producten', 'ProductController@index');
-Route::get('/producten/{product}', 'ProductController@show');/*
-<<<<<<< HEAD
-Route::post('products/delete', 'ProductController@destroy');
-Route::resource('products','ProductController');
+Route::get('/producten/{product}', 'ProductController@show');
 
-Route::get('/registreren', 'RegistrationController@create');
-Route::post('/registreren', 'RegistrationController@store');
-
-Route::get('/inloggen', 'SessionsController@create');
-/*Auth::routes();
-=======*/
 Route::group(['prefix' => '/admin'], function() {
 	Route::get('/', 'AdminController@index');
 	//Products
-	Route::get('/producten','AdminController@products');
+	Route::get('producten','AdminController@products');
 	Route::get('producten/aanmaken', 'ProductController@create');
 	Route::post('producten/opslaan', 'ProductController@store');
 	Route::get('producten/{product}/aanpassen', 'ProductController@edit');
 	Route::patch('producten/{product}', ['as' => 'admin.producten.update', 'uses' => 'ProductController@update']);
 	Route::post('products/verwijder', 'ProductController@destroy');
 	//Categories
+	Route::get('categorieen', 'CategoryController@index');
+	Route::get('categorieen/aanmaken', 'CategoryController@create');
+	Route::post('categorieen/opslaan', 'CategoryController@store');
+	Route::get('categorieen/{product}/aanpassen', 'CategoryController@edit');
+	Route::patch('categorieen/{product}', ['as' => 'admin.categorieen.update', 'uses' => 'CategoryController@update']);
+	Route::post('products/verwijder', 'CategoryController@destroy');
 });
 
 /* User */
@@ -49,11 +47,9 @@ Route::get('/registreren', 'RegistrationController@create');
 Route::post('/registreren', 'RegistrationController@store');
 
 Route::get('/account', 'RegistrationController@show');
-//Route::resource('producten','ProductController');
 
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-/*>>>>>>> e2a882ae84ea8e7722119b3bcb90abac64bba44b*/
