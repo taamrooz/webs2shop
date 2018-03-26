@@ -7,10 +7,10 @@
             <h3>Registreren</h3>
             <form method="post" action="/registreren">
                 @csrf
-                <input type="text" name="username" placeholder="Gebruikersnaam" class="{{ $errors->has('username') ? ' is-invalid' : '' }}" autofocus>
-                @if ($errors->has('username'))
+                <input type="text" name="name" placeholder="Naam" class="{{ $errors->has('name') ? ' is-invalid' : '' }}" autofocus>
+                @if ($errors->has('name'))
                     <span class="invalid-feedback">
-                        <strong>{{ $errors->first('username') }}</strong>
+                        <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
                 <input type="email" name="email" placeholder="Email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" autofocus>
@@ -25,10 +25,10 @@
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
                 @endif
-                <input type="password" name="re-password" placeholder="Wachtwoord herhalen" class="{{ $errors->has('password') ? ' is-invalid' : '' }}">
-                @if ($errors->has('re-password'))
+                <input type="password" name="password_confirmation" placeholder="Wachtwoord herhalen" class="{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}">
+                @if ($errors->has('password_confirmation'))
                     <span class="invalid-feedback">
-                        <strong>{{ $errors->first('re-password') }}</strong>
+                        <strong>{{ $errors->first('password_confirmation') }}</strong>
                     </span>
                 @endif
 

@@ -1,4 +1,4 @@
-@extends('layouts.productindex')
+@extends('index')
 
 @section('content')
 <div class="col-lg-9">

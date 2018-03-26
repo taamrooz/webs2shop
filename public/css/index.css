@@ -380,7 +380,8 @@ header {
 
 .login .invalid-feedback {
     background-color: var(--errorWhite);
-    padding: 3px;
+    font-weight: bold;
+    color: var(--red);
 }
 
 .login .btn {
@@ -392,6 +393,38 @@ header {
 .login .btn:hover {
     background-color: var(--redHover);
 }
+
+/* Account */
+.account {
+    display: flex;
+    flex-direction: var(--navbarDir);
+}
+
+.account > * {
+    margin: 10px;
+}
+
+.account h1 {
+    border-bottom: 1px solid #EEEEEE;
+    font-size: calc(var(--h1Size) + 5px);
+}
+
+.account .personal_information > *, .account .orders > * {
+    padding: 20px;
+}
+
+.account .personal_information {
+    flex: 2;
+}
+
+.account li:not(:first-child){
+    margin-top: 10px;
+}
+
+.account .orders {
+    flex: 1;
+}
+
 
 /* Footer */
 footer {

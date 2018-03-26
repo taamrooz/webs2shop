@@ -42,7 +42,7 @@
             <ul>
                 <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                 <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen" >Winkelwagen</a></li>
-                <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
+                <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/login">Inloggen</a></li>
             </ul>
         </div>
 
@@ -61,33 +61,13 @@
                         </li>
                         <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                         <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
-
-
                         @guest
                             <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
                             <li><a href="/registreren">Registreren</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                            <li class="{{ Request::is('account') || Request::is('account/*') ? 'active' : '' }}"><a href="/account">{{ Auth::user()->name }}</a></li>
+                            <li><a href="/uitloggen">Uitloggen</a></li>
                         @endguest
-
                     </ul>
                 </nav>
             </header>

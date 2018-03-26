@@ -15,28 +15,39 @@ class RegistrationController extends Controller
 
     }
 
-    public function store(Request $request) {
-
-        dd(request());
+    public function store() {
 
         // Validate
-        $this->validate($request, [
+        $this->validate(request(), [
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required',
-            're-password' => 'required'
+            'password' => 'required|confirmed'
         ]);
 
-        return Redirect::to('/');
-
         // Create and save
-        $user = User::create(request(['username', 'email', 'password']));
+        $user = User::create([
+            'name' => request('name'),
+            'email' => request('email'),
+            'password' => bcrypt(request('password'))
+        ]);
 
         // Sign in
         auth()->login($user);
 
         // Redirect
         return Redirect::to('/');
+
+    }
+
+    public function show() {
+
+        if(!auth()->check()){
+            return redirect('/');
+        }
+
+        $user = auth()->user();
+
+        return view('/auth.account', compact('user'));
 
     }
 
