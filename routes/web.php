@@ -15,8 +15,6 @@
 Route::get('/', function () {
 	return view('home');
 });
-
-Route::resource('producten','ProductController');
 Route::get('/producten', 'ProductController@index');
 Route::get('/producten/{product}', 'ProductController@show');
 
@@ -33,9 +31,18 @@ Route::group(['prefix' => '/admin'], function() {
 	Route::get('categorieen', 'CategoryController@index');
 	Route::get('categorieen/aanmaken', 'CategoryController@create');
 	Route::post('categorieen/opslaan', 'CategoryController@store');
-	Route::get('categorieen/{product}/aanpassen', 'CategoryController@edit');
-	Route::patch('categorieen/{product}', ['as' => 'admin.categorieen.update', 'uses' => 'CategoryController@update']);
-	Route::post('products/verwijder', 'CategoryController@destroy');
+	Route::get('categorieen/{category}/aanpassen', 'CategoryController@edit');
+	Route::patch('categorieen/{category}', ['as' => 'admin.categorieen.update', 'uses' => 'CategoryController@update']);
+	Route::post('categorieen/verwijder', 'CategoryController@destroy');
+	//Users
+	Route::get('gebruikers', 'UserController@index');
+	Route::get('gebruikers/aanmaken', 'UserController@create');
+	Route::post('gebruikers/opslaan', 'UserController@store');
+	Route::get('gebruikers/{user}/aanpassen', 'UserController@edit');
+	Route::patch('gebruikers/{user}', ['as' => 'admin.gebruikers.update', 'uses' => 'UserController@update']);
+	Route::post('gebruikers/verwijder', 'UserController@destroy');
+	//Orders
+	 Route::get('orders', 'OrderController@index');
 });
 
 /* User */
