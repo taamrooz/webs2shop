@@ -42,7 +42,12 @@ Route::group(['prefix' => '/admin'], function() {
 	Route::patch('gebruikers/{user}', ['as' => 'admin.gebruikers.update', 'uses' => 'UserController@update']);
 	Route::post('gebruikers/verwijder', 'UserController@destroy');
 	//Orders
-	 Route::get('orders', 'OrderController@index');
+	Route::get('orders', 'OrderController@index');
+	Route::get('orders/aanmaken', 'OrderController@create');
+	Route::post('orders/opslaan', 'OrderController@store');
+	Route::get('orders/{order}/aanpassen', 'OrderController@edit');
+	Route::patch('orders/{order}', ['as' => 'admin.orders.update', 'uses' => 'OrderController@update']);
+	Route::post('orders/verwijder', 'OrderController@destroy');
 });
 
 /* User */
