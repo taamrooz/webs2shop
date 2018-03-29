@@ -17,6 +17,7 @@ Route::get('/', function () {
 });
 Route::get('/producten', 'ProductController@index');
 Route::get('/producten/{product}', 'ProductController@show');
+Route::get('/gebruikers/{user}/orders/{order}', 'OrderController@show');
 
 Route::group(['prefix' => '/admin'], function() {
 	Route::get('/', 'AdminController@index');
