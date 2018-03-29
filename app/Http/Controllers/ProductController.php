@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
@@ -18,22 +19,25 @@ class ProductController extends Controller
 
         // Get all categories with at least one product
         $products = Product::all();
-        $categories = array();
+        $category_ids = array();
 
         foreach($products as $product){
 
-            if (!in_array($product->categorie.'', $categories)){
+            if (!in_array($product->category_id.'', $category_ids)){
 
-                $categories[] = $product->categorie;
+                $category_ids[] = $product->category_id;
 
             }
 
         }
 
+        $categories = Category::whereIn('id', $category_ids)->get();
+
         // Check if filter exists
         if (session()->has('filter')) {
+            //dd(session()->get('filter'));
 
-            $products = Product::whereIn('categorie', session()->get('filter'))->get();
+            $products = Product::whereIn('category_id', session()->get('filter'))->get();
 
         }else {
 
@@ -143,6 +147,7 @@ class ProductController extends Controller
             session()->put('filter');
 
         }
+
 
         return Redirect::to('/producten');
 

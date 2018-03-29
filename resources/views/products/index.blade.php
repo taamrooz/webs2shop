@@ -21,20 +21,20 @@
 								// Check if category is checked
 								$checked = '';
 								if(session()->has('filter')){
-									$index = in_array($category, session()->get('filter', []));
+									$index = in_array($category->id, session()->get('filter', []));
 									if($index !== false){
 										$checked = 'checked';
 									}
 								}
 
-								echo "<li><label for='".$category."'>
+								echo "<li><label for='".$category->categorie."'>
 								<input onchange='this.form.submit()'
 									type='checkbox' name='category[]'
-									value='".$category."'
-									id='".$category."'
+									value='".$category->id."'
+									id='".$category->categorie."'
 									".$checked."
 								>
-								".$category."
+								".$category->categorie."
 								</label></li>";
                             }
                             ?>
@@ -62,6 +62,8 @@
 	</div>
 
 	<script>
+
+		// Ask if the admin really wants to delete it
 		$(document).on('click', '.delete-button', function (e) {
 
 			e.preventDefault();
@@ -90,11 +92,13 @@
 		});
 
 
+		// Filter using some magic
         $(document).ready(function(){
             $('.search').on('keyup', function(){
                 var input = $(this).val().toLowerCase();
                 $('.products .product').each(function(){
                    var title = $(this).data('title').toLowerCase();
+                   console.log(title);
                    if(title.search(input) !== 0){
                        $(this).hide();
                    }else{
@@ -103,10 +107,5 @@
                 });
             });
         });
-
-
-        // Check checked categories
-
-
 	</script>
 @endsection
