@@ -11,9 +11,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i<8;$i++){
+        for($i=1;$i<9;$i++){
             DB::table('categories')->insert([
-                'categorie' => 'Categorie #'. $i
+                'categorie' => 'Categorie '. $i
             ]);
         }
     }
