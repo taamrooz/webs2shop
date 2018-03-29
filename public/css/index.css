@@ -326,11 +326,12 @@ header {
 .catalogus {
     display: flex;
     flex-direction: column;
+    width: var(--centerWidth);
 }
 
 .filter {
     margin: 10px 7px 0 7px;
-    flex: 1;
+    flex: none;
     height: fit-content;
 }
 
@@ -343,16 +344,16 @@ header {
     justify-content: space-between;
 }
 
-.filter .search {
+.filter .search_bar {
     display: flex;
 }
 
-.filter .search input{
+.filter .search_bar input{
     width: 100%;
     margin: 5px;
 }
 
-.filter .search input::placeholder {
+.filter .search_bar input::placeholder {
     font-family: inherit;
 }
 
@@ -363,16 +364,17 @@ header {
 
 .products {
     flex: 1;
+    padding: 0 2px;
     flex-grow: var(--productsGrowth);
     flex-direction: row;
     flex-wrap: wrap;
     display: flex;
-    justify-content: space-evenly;
 }
 
 .product {
     width: var(--productCardWidth);
-    margin: 10px 0 0 0;
+    height: fit-content;
+    margin: 10px 5px 0;
 }
 
 .product img {
@@ -569,6 +571,10 @@ footer > .footerContent > ul > li {
         --navbarDir: row;
         --productCardWidth: calc(100% * (1/3) - 10px - 1px);
         --homeBannerHeight: 400px;
+    }
+
+    .filter {
+        flex: 1;
     }
 
     .navbar > ul > li:not(:first-child) {

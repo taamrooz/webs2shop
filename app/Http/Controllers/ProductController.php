@@ -14,10 +14,37 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
+        // Get all categories with at least one product
         $products = Product::all();
-        return view('products.index', compact('products'));
+        $categories = array();
+
+        foreach($products as $product){
+
+            if (!in_array($product->categorie.'', $categories)){
+
+                $categories[] = $product->categorie;
+
+            }
+
+        }
+
+        // Check if filter exists
+        if (session()->has('filter')) {
+
+            $products = Product::whereIn('categorie', session()->get('filter'))->get();
+
+        }else {
+
+            $products = Product::all();
+
+        }
+
+        //dd($categories);
+
+        // Pass data to view
+        return view('products.index', compact('products', 'categories'));
     }
 
     /**
@@ -102,5 +129,22 @@ class ProductController extends Controller
         // Return to the page with a message
         Session::flash('msg', 'Product verwijderd');
         return Redirect::to('/');
+    }
+
+    public function filter() {
+
+        //Fill session with filters
+        if(!empty(request()->category)){
+
+            session()->put('filter', $_POST['category']);
+
+        }else {
+
+            session()->put('filter');
+
+        }
+
+        return Redirect::to('/producten');
+
     }
 }

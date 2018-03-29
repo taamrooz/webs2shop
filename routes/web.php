@@ -15,7 +15,9 @@
 Route::get('/', function () {
 	return view('home');
 });
+
 Route::get('/producten', 'ProductController@index');
+Route::post('/producten', 'ProductController@filter');
 Route::get('/producten/{product}', 'ProductController@show');
 Route::get('/gebruikers/{user}/orders/{order}', 'OrderController@show');
 
