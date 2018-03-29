@@ -13,7 +13,7 @@ class OrderSeeder extends Seeder
     {
         for($i=1;$i<9;$i++){
             DB::table('orders')->insert([
-                'userid' => $i
+                'user_id' => $i
             ]);
         }
     }
