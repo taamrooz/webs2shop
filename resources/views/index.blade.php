@@ -81,10 +81,8 @@
             </header>
 
             <div class="centerContent">
-
                 {{-- Mainstage --}}
                 <div class="content">
-
                     {{-- Feedback messages --}}
                     @if(Session::has('msg'))
                         <div class="alert alert-success">

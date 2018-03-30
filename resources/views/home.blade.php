@@ -1,7 +1,6 @@
 @extends('index')
 
 @section('content')
-
     <div class="home">
         <div class="home_banner">
             <img src="{{ asset('/img/onkruid-banner.jpg') }}">

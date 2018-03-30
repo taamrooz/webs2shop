@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('content')
+{{ Breadcrumbs::render('product', $product) }}
 <div class="col-lg-9">
     <div class="row">
         <div class="card mt-4">

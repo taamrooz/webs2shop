@@ -1,5 +1,6 @@
 @extends('index')
 @section('content')
+{{ Breadcrumbs::render('adminproducts') }}
 	<div class="">
 		<div class="products">
 			@foreach($products as $product)

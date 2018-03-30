@@ -73,3 +73,4 @@ Route::get('/account', 'RegistrationController@show');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about');

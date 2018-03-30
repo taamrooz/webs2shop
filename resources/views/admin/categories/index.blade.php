@@ -1,5 +1,6 @@
 @extends('index')
 @section('content')
+{{ Breadcrumbs::render('admincategories') }}
 	<div class="">
 		<div class="categories">
 			@foreach($categories as $category)

@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('content')
-
+{{ Breadcrumbs::render('shoppingcart') }}
     <h1>winkelwagen</h1>
 
     @if(session()->exists('cart'))
