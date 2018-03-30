@@ -21,6 +21,10 @@ Route::post('/producten', 'ProductController@filter');
 Route::get('/producten/{product}', 'ProductController@show');
 Route::get('/gebruikers/{user}/orders/{order}', 'OrderController@show');
 
+// Winkelwagen
+Route::post('/addToCart', 'ShoppingCartController@add');
+Route::get('/winkelwagen', 'ShoppingCartController@index');
+
 Route::group(['prefix' => '/admin'], function() {
 	Route::get('/', 'AdminController@index');
 	//Products

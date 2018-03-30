@@ -16,6 +16,7 @@
                     <form method="post" action="/producten">
                         {{ csrf_field() }}
                         <ul>
+							{{--TODO make this foldable--}}
                             <?php
                             foreach($categories as $category) {
 								// Check if category is checked
@@ -53,6 +54,11 @@
 						<h3>{{ $product->titel }}</h3>
 						<p>{{ $short }}</p>
 						<div class="product_options">
+							<form method="post" action="/addToCart">
+								{{ csrf_field() }}
+								<input type="hidden" name="product_id" value="{{ $product->id }}">
+								<button type="submit" class="btn"><img src="{{ asset('/img/add_cart.svg') }}" alt="Voeg toe aan winkelwagen"></button>
+							</form>
 							<a class="inspect btn" href="{{ URL::to('/producten/'.$product->id ) }}">Bekijk</a>
 						</div>
 					</div>

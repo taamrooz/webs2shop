@@ -148,7 +148,6 @@ class ProductController extends Controller
 
         }
 
-
         return Redirect::to('/producten');
 
     }
