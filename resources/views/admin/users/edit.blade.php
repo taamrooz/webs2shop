@@ -36,6 +36,13 @@
                 <div class="alert alert-danger">{{ $errors->first('password_confirmation') }}</div>
             @endif
         </div>
+        <div class="form-group row">
+            {{ Form::label('user_level', 'Gebruiker level', ['class'=>'col-sm-2 col-form-label']) }}
+            {{ Form::text('user_level', '', ['class'=>'form-control col-sm-10', 'placeholder'=>'Gebruiker level']) }}
+            @if($errors->has('user_level'))
+                <div class="alert alert-danger">{{ $errors->first('user_level') }}</div>
+            @endif
+        </div>
 		<div class="form-group">
 			{{ Form::submit('Update', ['class' => 'btn btn-success'])}}
 		</div>

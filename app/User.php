@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'user_level',
     ];
 
     /**
@@ -31,5 +31,9 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+    public function isAdmin()
+    {
+        return (\Auth::check() && $this->user_level === 2);
     }
 }
