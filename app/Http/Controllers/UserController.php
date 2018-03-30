@@ -95,13 +95,15 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //TODO Check if person is allowed to delete the module
-
         // Set module 'deleted'
         $user->delete();
         
         // Return to the page with a message
         Session::flash('msg', 'Gebruiker verwijderd');
         return Redirect::to('/');
+    }
+
+    public function cart() {
+        return $this->hasOne('App\ShoppingCart');
     }
 }

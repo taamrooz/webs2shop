@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return (\Auth::check() && $this->user_level === 2);
     }
+
+
+    public function cart() {
+        return $this->hasMany(ShoppingCart::class);
+    }
 }
