@@ -64,6 +64,11 @@
                         </li>
                         <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                         <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
+                        @if(Auth::user() !== null)
+                            @if(Auth::user()->isAdmin())
+                                <li class="{{ Request::is('admin') || Request::is('admin/*') ? 'active' : '' }}"><a href="/admin">Admin</a></li>
+                            @endif
+                        @endif
                         @guest
                             <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
                             <li><a href="/registreren">Registreren</a></li>

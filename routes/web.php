@@ -21,7 +21,7 @@ Route::post('/producten', 'ProductController@filter');
 Route::get('/producten/{product}', 'ProductController@show');
 Route::get('/gebruikers/{user}/orders/{order}', 'OrderController@show');
 
-Route::group(['prefix' => '/admin'], function() {
+Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {
 	Route::get('/', 'AdminController@index');
 	//Products
 	Route::get('producten','AdminController@products');

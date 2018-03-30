@@ -42,6 +42,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->user_level = $request->user_level;
         $user->save();
         Session::flash('msg', 'Gebruiker aangemaakt!');
         return Redirect::to('/');
