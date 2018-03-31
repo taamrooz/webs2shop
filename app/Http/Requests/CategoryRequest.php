@@ -13,7 +13,10 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if(\Auth::user() === null){
+            return false;
+        }
+        return \Auth::user()->user_level === 2;
     }
 
     /**
@@ -26,5 +29,10 @@ class CategoryRequest extends FormRequest
         return [
             'categorie' => 'unique:categories,categorie'
         ];
+    }
+
+    public function messages()
+    {
+        'categorie.unique' => 'Deze categorie bestaat al'
     }
 }

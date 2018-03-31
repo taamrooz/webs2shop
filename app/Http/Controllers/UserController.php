@@ -45,7 +45,7 @@ class UserController extends Controller
         $user->user_level = $request->user_level;
         $user->save();
         Session::flash('msg', 'Gebruiker aangemaakt!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/gebruikers');
     }
 
     /**
