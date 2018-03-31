@@ -63,6 +63,10 @@ a {
     display: inline;
 }
 
+.breadcrumb li:not(:last-child):after {
+    content: ' > ';
+}
+
 /* Nav */
 header {
     background-color: var(--light);
