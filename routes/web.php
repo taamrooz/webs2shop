@@ -24,6 +24,9 @@ Route::get('/gebruikers/{user}/orders/{order}', 'OrderController@show');
 // Winkelwagen
 Route::post('/addToCart', 'ShoppingCartController@add');
 Route::get('/winkelwagen', 'ShoppingCartController@index');
+Route::get('/winkelwagen/{id}/verwijder', 'ShoppingCartController@remove');
+Route::post('/winkelwagen/bijwerken', 'ShoppingCartController@edit');
+Route::get('/winkelwagen/leegmaken', 'ShoppingCartController@destroy');
 
 // Admin
 Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {

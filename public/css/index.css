@@ -487,12 +487,23 @@ header {
     flex: 2;
 }
 
-.account li:not(:first-child){
+.account li:not(:first-child) {
     margin-top: 10px;
 }
 
 .account .orders {
     flex: 1;
+}
+
+/* Shopping cart */
+.cart {
+    padding: 15px;
+}
+
+.cart table{
+    border-spacing: 5px;
+    border-collapse: separate;
+    width: 100%;
 }
 
 

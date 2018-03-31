@@ -12,13 +12,11 @@ class ShoppingCartController extends Controller
     public function index() {
 
         // Check the cart
-
-        // Receive product information
-
         if(session()->exists('cart')) {
             $products = Product::whereIn('id', array_keys(session()->get('cart')))->get();
         }
 
+        // Give user shopping cart view
         return view('shoppingcart.show', compact('products'));
 
     }
@@ -55,6 +53,75 @@ class ShoppingCartController extends Controller
 
         // Send user to previous page
         return back();
+
+    }
+
+    public function remove($id) {
+
+        // Get cart
+        if(empty(session()->get('cart'))){
+
+            $cart = array();
+
+        }else{
+
+            $cart = session()->get('cart');
+
+        }
+
+        // Remove product from shopping cart
+        if (array_key_exists($id, $cart)) {
+            unset($cart[$id]);
+        }
+
+        // Rewrite cart
+        session()->put('cart', $cart);
+
+        // Send user back to shopping cart
+        return redirect('/winkelwagen');
+
+    }
+
+    public function edit() {
+
+        // Get cart
+        if(empty(session()->get('cart'))){
+
+            $cart = array();
+
+        }else{
+
+            $cart = session()->get('cart');
+
+        }
+
+        // Remove product from shopping cart
+        if (array_key_exists(request()->id, $cart)) {
+            $cart[request()->id] = request()->amount;
+        }
+
+        // Rewrite cart
+        session()->put('cart', $cart);
+
+        // Send user back to shopping cart
+        return redirect('/winkelwagen');
+
+    }
+
+    public function destroy() {
+
+        // Remove session
+        session()->forget('cart');
+
+        // Remove cart from database
+        if(auth()->user()->cart->count() > 0) {
+
+            auth()->user()->cart->each->delete();
+
+        }
+
+        // Send user back to shopping cart
+        return redirect('/winkelwagen');
 
     }
 }

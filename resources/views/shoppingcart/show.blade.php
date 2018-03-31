@@ -6,27 +6,46 @@
 
     @if(session()->exists('cart'))
         <div class="cart card">
-
-            <?php
-                $total = 0;
-            ?>
-
-            @foreach($products as $product)
-
-                <div class="item">{{ $product->titel }} - {{ session()->get('cart')[$product->id] }}</div>
-
+            <small>Het kan zijn dat je nog producten in de winkelwagen hebt staan van de vorige keer.</small>
+            <table>
+                <tr>
+                    <td>Product</td>
+                    <td>Aantal</td>
+                    <td>Prijs</td>
+                    <td>Opties</td>
+                </tr>
                 <?php
-                    $total += $product->prijs * session()->get('cart')[$product->id];
+                    $total = 0;
                 ?>
 
-            @endforeach
+                @foreach($products as $product)
 
+                    <tr>
+                        <form method="post" action="/winkelwagen/bijwerken">
+
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{ $product->id }}" name="id">
+
+                            <td><a href="/producten/{{ $product->id }}">{{ $product->titel }}</a></td>
+                            <td><input type="number" value="{{ session()->get('cart')[$product->id] }}" name="amount"></td>
+                            <td>€{{ $product->prijs * session()->get('cart')[$product->id] }}</td>
+                            <td><button type="submit" class="btn">Bijwerken</button><a href="/winkelwagen/{{ $product->id }}/verwijder">Verwijderen</a></td>
+
+                        </form>
+                    </tr>
+
+                    <?php
+                        $total += $product->prijs * session()->get('cart')[$product->id];
+                    ?>
+
+                @endforeach
+            </table>
             <hr>
             <div class="total">Totaal€{{ $total }}</div>
             <div class="options">
-                <button type="submit">Winkelwagen leegmaken</button>
-                <button type="submit">Bewerken</button>
-                <button type="submit">Bestellen</button>
+                <a href="/winkelwagen/leegmaken" class="btn">Winkelwagen leegmaken</a>
+                <a href="/winkelwagen/bestellen" class="btn">Bestellen</a>
+                {{--TODO Bestellen pagina?--}}
             </div>
         </div>
     @else
