@@ -54,6 +54,15 @@ a {
     transition: 0.3s;
 }
 
+.breadcrumb {
+    width: var(--centerWidth);
+    padding: 10px 0 0 10px;
+}
+
+.breadcrumb-item {
+    display: inline;
+}
+
 /* Nav */
 header {
     background-color: var(--light);
@@ -255,7 +264,8 @@ header {
 
 .content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     flex-grow: 1;
     min-height: fit-content;

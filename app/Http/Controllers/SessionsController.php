@@ -30,9 +30,39 @@ class SessionsController extends Controller
             ]);
         }
 
-        //TODO check if user has saved shopping cart
+        // Check if user has saved shopping cart
+        if(auth()->user()->cart->count() > 0) {
 
-        // Sign user in
+            // Get cart if exists
+            if(empty(session()->get('cart'))){
+
+                $cart = array();
+
+            }else{
+
+                $cart = session()->get('cart');
+
+            }
+
+            foreach(auth()->user()->cart as $item){
+
+                // Add data to cart
+                if (array_key_exists($item->pr_id, $cart)) {
+
+                    $cart[$item->pr_id] = $cart[$item->pr_id] + $item->amount;
+
+                }else {
+
+                    $cart[$item->pr_id] = $item->amount;
+
+                }
+
+                // Rewrite cart
+                session()->put('cart', $cart);
+            }
+        }
+
+        // Send user to homepage
         return redirect('/');
 
     }

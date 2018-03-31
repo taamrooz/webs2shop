@@ -1,11 +1,11 @@
 @extends('index')
 
 @section('content')
-{{ Breadcrumbs::render('shoppingcart') }}
+    {{ Breadcrumbs::render('shoppingcart') }}
     <h1>winkelwagen</h1>
 
     @if(session()->exists('cart'))
-        <div class="cart">
+        <div class="cart card">
 
             <?php
                 $total = 0;

@@ -1,8 +1,8 @@
 @extends('index')
 
 @section('content')
+	{{ Breadcrumbs::render('catalog') }}
 	<div class="row">
-		{{ Breadcrumbs::render('catalog') }}
 		<div class="catalogus">
 			<div class="filter card">
 				<div class="filter_header">
