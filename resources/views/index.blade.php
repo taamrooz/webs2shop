@@ -49,10 +49,11 @@
             </ul>
         </div>
 
-        {{-- Everything at z-index 0 --}}
+        {{-- Everything at z-index 0 so it can be blurred out when something pops up--}}
         <div id="blur">
 
             {{-- Navbar --}}
+            @yield('nav')
             <header>
                 <nav class="navbar row" id="navbar">
                     <ul>
@@ -62,6 +63,17 @@
                                 <span><b>Ackerwildkrauter</b></span>
                             </a>
                         </li>
+                        {{--@foreach($menuItems as $menuItem)
+                            @if($menuItem->user_level >= 1)
+                                @if(Auth::user() !== null)
+                                    @if(Auth::user()->isAdmin())
+                                        <li class="{{ Request::is('admin') || Request::is('admin/*') ? 'active' : '' }}"><a href="/admin">Admin</a></li>
+                                    @endif
+                                @endif
+                            @else
+                                <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
+                            @endif
+                        @endforeach--}}
                         <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                         <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
                         @if(Auth::user() !== null)
@@ -119,7 +131,7 @@
                             </li>
                         </ul>
                     </div>
-                    <p class="colofon">Made by: Tom Roozen and Jan ten Haaf - &copy; {{ date('Y') }}</p>
+                    <p class="colofon">Website made by: Tom Roozen and Jan ten Haaf - &copy; {{ date('Y') }}</p>
                 </footer>
             </div>
         </div>

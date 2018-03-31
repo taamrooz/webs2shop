@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class ShoppingCartController extends Controller
 {
@@ -23,6 +21,9 @@ class ShoppingCartController extends Controller
 
     public function add() {
 
+        // Get cart
+        $cart = $this->getCart();
+
         // Check if amount has been given
         if (!request()->has('aantal') || request('aantal') < 1) {
             $aantal = 1;
@@ -30,12 +31,6 @@ class ShoppingCartController extends Controller
             $aantal = request('aantal');
         }
 
-        // Get cart
-        if(empty(session()->get('cart'))){
-            $cart = array();
-        }else{
-            $cart = session()->get('cart');
-        }
 
         // Add data to cart
         if (array_key_exists(request('product_id'), $cart)) {
@@ -59,15 +54,7 @@ class ShoppingCartController extends Controller
     public function remove($id) {
 
         // Get cart
-        if(empty(session()->get('cart'))){
-
-            $cart = array();
-
-        }else{
-
-            $cart = session()->get('cart');
-
-        }
+        $cart = $this->getCart();
 
         // Remove product from shopping cart
         if (array_key_exists($id, $cart)) {
@@ -85,15 +72,7 @@ class ShoppingCartController extends Controller
     public function edit() {
 
         // Get cart
-        if(empty(session()->get('cart'))){
-
-            $cart = array();
-
-        }else{
-
-            $cart = session()->get('cart');
-
-        }
+        $cart = $this->getCart();
 
         // Remove product from shopping cart
         if (array_key_exists(request()->id, $cart)) {
@@ -123,5 +102,15 @@ class ShoppingCartController extends Controller
         // Send user back to shopping cart
         return redirect('/winkelwagen');
 
+    }
+
+    private function getCart(){
+        // Get cart
+        if(empty(session()->get('cart'))){
+            $cart = array();
+        }else{
+            $cart = session()->get('cart');
+        }
+        return $cart;
     }
 }
