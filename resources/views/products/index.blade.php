@@ -18,28 +18,36 @@
                         {{ csrf_field() }}
                         <ul>
 							{{--TODO make this foldable--}}
-                            <?php
-                            foreach($categories as $category) {
-								// Check if category is checked
-								$checked = '';
-								if(session()->has('filter')){
-									$index = in_array($category->id, session()->get('filter', []));
-									if($index !== false){
-										$checked = 'checked';
-									}
-								}
 
-								echo "<li><label for='".$category->categorie."'>
-								<input onchange='this.form.submit()'
-									type='checkbox' name='category[]'
-									value='".$category->id."'
-									id='".$category->categorie."'
-									".$checked."
-								>
-								".$category->categorie."
-								</label></li>";
-                            }
-                            ?>
+							@foreach($categories as $category)
+								<div class="category">
+									<h3>{{ $category->categorie }}</h3>
+                                    <?php
+                                    foreach($subCategories[$category->id] as $subCategory) {
+
+                                        // Check if category is checked
+                                        $checked = '';
+
+                                        if(session()->has('filter')){
+                                            $index = in_array($subCategory->id, session()->get('filter', []));
+                                            if($index !== false){
+                                                $checked = 'checked';
+                                            }
+                                        }
+
+                                        echo "<li><label for='".$subCategory->categorie."'>
+										<input onchange='this.form.submit()'
+											type='checkbox' name='category[]'
+											value='".$subCategory->id."'
+											id='".$subCategory->categorie."'
+											".$checked."
+										>
+										".$subCategory->categorie."
+										</label></li>";
+                                    }
+                                    ?>
+								</div>
+							@endforeach
                         </ul>
                     </form>
 				</div>

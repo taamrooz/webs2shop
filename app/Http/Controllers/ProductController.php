@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
@@ -31,11 +30,16 @@ class ProductController extends Controller
 
         }
 
-        $categories = Category::whereIn('id', $category_ids)->get();
+        $categories = \DB::table('categories')->whereNull('parent_id')->get();
+
+        foreach($categories as $category) {
+            $subCategories[$category->id] = \DB::table('categories')->where('parent_id', '=', $category->id)->get();
+        }
+
+        //dd($categories, $subCategories);
 
         // Check if filter exists
         if (session()->has('filter')) {
-            //dd(session()->get('filter'));
 
             $products = Product::whereIn('category_id', session()->get('filter'))->get();
 
@@ -45,10 +49,8 @@ class ProductController extends Controller
 
         }
 
-        //dd($categories);
-
         // Pass data to view
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'subCategories'));
     }
 
     /**
