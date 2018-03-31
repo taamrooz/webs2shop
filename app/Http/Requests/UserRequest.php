@@ -14,7 +14,10 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if(\Auth::user() === null){
+            return false;
+        }
+        return \Auth::user()->user_level === 2;
     }
 
     /**

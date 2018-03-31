@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
+use App\Product;
 use App\Http\Requests\OrderRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +29,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('admin.orders.create');
+        $users = User::pluck('name', 'id');
+        $products = Product::pluck('titel', 'id');
+        return view('admin.orders.create', compact(['users', 'products']));
     }
 
     /**
@@ -36,9 +40,18 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        //
+        $order = new Order();
+        $order->user_id = $request->user_id;
+        foreach ($request->products as $product) {
+            $order->pivot->order_id = $order->id;
+            $order->pivot->product_id = $product;
+        }
+        $order->pivot->save();
+        $order->save();
+        Session::flash('msg', 'Order aangemaakt!');
+        return Redirect::to('/admin/orders');
     }
 
     /**
@@ -60,7 +73,9 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('admin.orders.edit')->with('order', $order);
+        $users = User::pluck('name', 'id');
+        $products = Product::pluck('titel', 'id');
+        return view('admin.orders.edit', compact(['users', 'products']))->with('order', $order);
     }
 
     /**
@@ -70,7 +85,7 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(OrderRequest $request, Order $order)
     {
         //
     }
