@@ -24,7 +24,7 @@ class ShoppingCartController extends Controller
     public function add() {
 
         // Check if amount has been given
-        if (!request()->has('aantal')) {
+        if (!request()->has('aantal') || request('aantal') < 1) {
             $aantal = 1;
         }else {
             $aantal = request('aantal');
@@ -104,7 +104,7 @@ class ShoppingCartController extends Controller
         session()->put('cart', $cart);
 
         // Send user back to shopping cart
-        return redirect('/winkelwagen');
+        return back();
 
     }
 

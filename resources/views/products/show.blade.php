@@ -2,40 +2,31 @@
 
 @section('content')
 {{ Breadcrumbs::render('product', $product) }}
-<div class="col-lg-9">
-    <div class="row">
-        <div class="card mt-4">
-            @if($product->image == null)
-            <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-            @else
-            <img class="card-img-top img-fluid show-banner" src="data:image/gif;base64,{{$product->image}}"
-            alt="">
-            @endif
-            <div class="card-body">
-                <h3 class="card-title">{{$product->titel}}</h3>
-                <h4>
-                    @isset($product->prijs)
-                    {{ "$" . $product->prijs }}
-                    @endisset
-                    </h4>
-                    <div class="card">
-                        <div class="card-block">
-                            <p class="card-text" style="margin: 10px">{{$product->beschrijving}}</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            Kenmerken
-                        </div>
-                        <div class="card-block">
-                            <table class="table table-hover table-bordered">
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
+<div class="row">
+    <div class="card">
+        @if($product->image == null)
+        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+        @else
+        <img class="card-img-top img-fluid show-banner" src="data:image/gif;base64,{{$product->image}}"
+        alt="">
+        @endif
+        <div class="product_information">
+            <h3 class="card-title">{{$product->titel}}</h3>
+            <h4>
+                @isset($product->prijs)
+                {{ "$" . $product->prijs }}
+                @endisset
+                </h4>
+                <p>{{$product->beschrijving}}</p>
         </div>
-        @endsection
+        <div class="product_options">
+            <form method="post" action="/addToCart">
+                {{ csrf_field() }}
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <input type="number" name="aantal" value="1">
+                <button type="submit" class="btn"><img src="{{ asset('/img/add_cart.svg') }}" alt="Voeg toe aan winkelwagen"></button>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
