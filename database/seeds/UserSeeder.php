@@ -11,17 +11,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0;$i<8;$i++){
-            DB::table('users')->insert([
-                'name' => 'name #'. $i,
-                'email' => 'email'. $i . '@email.com',
-                'password' => bcrypt('password'. $i),
-                'user_level' => 1
-            ]);
-        }
+        factory(App\User::class,8)->create();
         DB::table('users')->insert([
             'name' => 'admin',
-            'email' => 'admin@email.com',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
             'user_level' => 2
         ]);
