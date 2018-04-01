@@ -77,7 +77,12 @@ class ProductController extends Controller
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
         $product->category_id = $request->category_id;
-        $product->imageurl = Storage::putFile('products', new File($request->image));
+        $image = $request->file('image');
+        $imageFileName = $product->titel. '.' $image->getClientOriginalExtension();
+        $s3 = Storage::disk('s3');
+        $filePath = '/products/' . $imageFileName;
+        $s3->put($filePath, file_get_contents($image), 'public');
+        $product->imageurl = 'https://webs2shop.s3-eu-west-3.amazonaws.com/' . $filePath;
         $product->save();
         Session::flash('msg', 'Product aangemaakt!');
         return Redirect::to('/');
@@ -119,7 +124,12 @@ class ProductController extends Controller
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
         $product->category_id = $request->category_id;
-        $product->imageurl = Storage::putFile('products', new File($request->image));
+        $image = $request->file('image');
+        $imageFileName = $product->titel. '.' $image->getClientOriginalExtension();
+        $s3 = Storage::disk('s3');
+        $filePath = '/products/' . $imageFileName;
+        $s3->put($filePath, file_get_contents($image), 'public');
+        $product->imageurl = 'https://webs2shop.s3-eu-west-3.amazonaws.com/' . $filePath;
         $product->save();
         Session::flash('msg', 'Product geüpdatet!');
         return Redirect::to('/');
