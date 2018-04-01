@@ -53,7 +53,6 @@
         <div id="blur">
 
             {{-- Navbar --}}
-            @yield('nav')
             <header>
                 <nav class="navbar row" id="navbar">
                     <ul>
@@ -63,31 +62,22 @@
                                 <span><b>Ackerwildkrauter</b></span>
                             </a>
                         </li>
-                        {{--@foreach($menuItems as $menuItem)
-                            @if($menuItem->user_level >= 1)
-                                @if(Auth::user() !== null)
-                                    @if(Auth::user()->isAdmin())
-                                        <li class="{{ Request::is('admin') || Request::is('admin/*') ? 'active' : '' }}"><a href="/admin">Admin</a></li>
-                                    @endif
-                                @endif
-                            @else
-                                <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
+                        <?php
+                            if(Auth::user() === null) {
+                                $userLevel = 0;
+                            }else{
+                                if(Auth::user()->isAdmin()){
+                                    $userLevel = 2;
+                                }else{
+                                    $userLevel = 1;
+                                }
+                            }
+                        ?>
+                        @foreach(DB::table('menu')->get() as $menuItem)
+                            @if($userLevel == $menuItem->user_level || $menuItem->user_level == 10 || ($userLevel > 1 && $menuItem->user_level >= 1))
+                                <li class="{{ Request::is($menuItem->path) || Request::is($menuItem->path.'/*') ? 'active' : '' }}"><a href="{{ $menuItem->path }}">{{ $menuItem->label }}</a></li>
                             @endif
-                        @endforeach--}}
-                        <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
-                        <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
-                        @if(Auth::user() !== null)
-                            @if(Auth::user()->isAdmin())
-                                <li class="{{ Request::is('admin') || Request::is('admin/*') ? 'active' : '' }}"><a href="/admin">Admin</a></li>
-                            @endif
-                        @endif
-                        @guest
-                            <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/inloggen">Inloggen</a></li>
-                            <li><a href="/registreren">Registreren</a></li>
-                        @else
-                            <li class="{{ Request::is('account') || Request::is('account/*') ? 'active' : '' }}"><a href="/account">{{ Auth::user()->name }}</a></li>
-                            <li><a href="/uitloggen">Uitloggen</a></li>
-                        @endguest
+                        @endforeach
                     </ul>
                 </nav>
             </header>
