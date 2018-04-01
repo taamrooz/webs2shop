@@ -80,9 +80,14 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $image = $request->file('image');
         $imageFileName = $product->titel. '.' .$image->getClientOriginalExtension();
-        $s3 = Storage::disk('s3');
+        
         $filePath = '/products/' . $imageFileName;
-        $s3->put($filePath, file_get_contents($image), 'public');
+        $s3 = \AWS::createClient('s3');
+        $s3->putObject(array('Bucket' => 'webs2shop',
+                             'Key' => $imageFileName,
+                             'SourceFile' => $image,
+                             'ACL' => 'public-read',
+                             'StorageClass' => 'REDUCED_REDUNDANCY'));
         $product->imageurl = 'https://webs2shop.s3-eu-west-3.amazonaws.com/' . $filePath;
         $product->save();
         Session::flash('msg', 'Product aangemaakt!');
