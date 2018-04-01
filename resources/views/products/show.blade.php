@@ -4,12 +4,8 @@
 {{ Breadcrumbs::render('product', $product) }}
 <div class="row">
     <div class="card">
-        @if($product->imageurl == null)
-        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-        @else
-        <img class="card-img-top img-fluid show-banner" src="{{ asset('storage/'. $product->imageurl)}}"
+        <img style="max-height: 400px; max-width: 900px;" class="card-img-top img-fluid show-banner" src="{{ asset('storage/'. $product->imageurl)}}"
         alt="">
-        @endif
         <div class="product_information">
             <h3 class="card-title">{{$product->titel}}</h3>
             <h4>
@@ -17,7 +13,7 @@
                 {{ "$" . $product->prijs }}
                 @endisset
                 </h4>
-                <p>{{$product->beschrijving}}</p>
+                <p style="max-width: 900px;">{{$product->beschrijving}}</p>
         </div>
         <div class="product_options">
             <form method="post" action="/addToCart">

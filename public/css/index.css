@@ -395,6 +395,10 @@ header {
     width: var(--productCardWidth);
     height: fit-content;
     margin: 10px 5px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product > img {
@@ -415,6 +419,9 @@ header {
     border-top: 1px solid #EEEEEE;
     display: flex;
     justify-content: flex-end;
+    right: 0;
+    bottom: 0;
+    vertical-align: bottom;
 }
 
 .product_options a:last-child {

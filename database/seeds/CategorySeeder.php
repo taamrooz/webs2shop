@@ -11,12 +11,21 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        for($i=1;$i<9;$i++){
-            ($i<3)?$r=null:$r=$i%2+1;
-            DB::table('categories')->insert([
-                'categorie' => 'Categorie '. $i,
-                'parent_id' => $r
-            ]);
-        }
+        DB::table('categories')->insert([
+            'categorie' => 'Vaste planten',
+            'parent_id' => null
+        ]);
+        DB::table('categories')->insert([
+            'categorie' => 'Bladplanten',
+            'parent_id' => 1
+        ]);
+        DB::table('categories')->insert([
+            'categorie' => 'Lavendel',
+            'parent_id' => 1
+        ]);
+        DB::table('categories')->insert([
+            'categorie' => 'Varens',
+            'parent_id' => 1
+        ]);
     }
 }

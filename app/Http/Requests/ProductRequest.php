@@ -30,6 +30,7 @@ class ProductRequest extends FormRequest
             'titel' => 'required|string|max:40',
             'beschrijving' => 'required|string|max:2000',
             'prijs' => 'required|numeric',
+            'image' => 'required|mimes:jpeg,png,bmp,tiff|max:4096'
         ];
     }
     public function messages()
@@ -47,7 +48,11 @@ class ProductRequest extends FormRequest
 
             //Prijs messages
             'prijs.required' => 'Je moet een :attribute meegeven',
-            'prijs.numeric' => 'De :attribute mag alleen bestaan uit cijfers.'
+            'prijs.numeric' => 'De :attribute mag alleen bestaan uit cijfers.',
+
+            //Image messages
+            'image.required' => 'Je moet een foto meegeven',
+            'image.mimes' => 'Alleen jpeg, png, bmp en tiff zijn toegestaan als bestanden'
         ];
     }
 }

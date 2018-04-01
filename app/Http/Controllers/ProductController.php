@@ -119,6 +119,8 @@ class ProductController extends Controller
         $product->titel = $request->titel;
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
+        $product->category_id = $request->category_id;
+        $product->imageurl = Storage::putFile('products', new File($request->image));
         $product->save();
         Session::flash('msg', 'Product geüpdatet!');
         return Redirect::to('/');

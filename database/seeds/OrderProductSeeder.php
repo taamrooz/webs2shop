@@ -11,7 +11,7 @@ class OrderProductSeeder extends Seeder
      */
     public function run()
     {
-        for($i=1;$i<9;$i++){
+        for($i=1;$i<6;$i++){
             DB::table('order_product')->insert([
                 'order_id' => $i,
                 'product_id' => $i
