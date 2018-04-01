@@ -83,7 +83,7 @@ class ProductController extends Controller
         $s3 = Storage::disk('s3');
         $filePath = '/products/' . $imageFileName;
         $s3->put($filePath, file_get_contents($image));
-        $product->imageurl = 'https://webs2shop.s3-eu-west-3.amazonaws.com/' . $filePath;
+        $product->imageurl = 'https://webs2shop.s3-eu-west-2.amazonaws.com/' . $filePath;
         $product->save();
         Session::flash('msg', 'Product aangemaakt!');
         return Redirect::to('/');
