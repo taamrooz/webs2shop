@@ -41,13 +41,17 @@ class RegistrationController extends Controller
 
     public function show() {
 
+        // Check if user is logged in
         if(!auth()->check()){
             return redirect('/');
         }
 
+        // Receive user data
         $user = auth()->user();
+        $orders = $user->orders();
 
-        return view('/auth.account', compact('user'));
+        // Return to view
+        return view('/auth.account', compact('user', 'orders'));
 
     }
 

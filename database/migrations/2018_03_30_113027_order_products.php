@@ -30,6 +30,6 @@ class OrderProducts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('order_products');
     }
 }

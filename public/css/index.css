@@ -530,11 +530,11 @@ header {
 }
 
 /* Shopping cart */
-.cart {
+.cart, .order_information{
     padding: 15px;
 }
 
-.cart table{
+.cart table, .order_information table{
     border-spacing: 5px;
     border-collapse: separate;
     width: 100%;

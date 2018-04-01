@@ -30,13 +30,13 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->get();
     }
+
     public function isAdmin()
     {
         return (\Auth::check() && $this->user_level === 2);
     }
-
 
     public function cart() {
         return $this->hasMany(ShoppingCart::class);

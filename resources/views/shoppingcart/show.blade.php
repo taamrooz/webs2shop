@@ -45,7 +45,6 @@
             <div class="options">
                 <a href="/winkelwagen/leegmaken" class="btn">Winkelwagen leegmaken</a>
                 <a href="/winkelwagen/bestellen" class="btn">Bestellen</a>
-                {{--TODO Bestellen pagina?--}}
             </div>
         </div>
     @else

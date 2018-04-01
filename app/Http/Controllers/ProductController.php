@@ -102,7 +102,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit')->with('product', $product);
+        $categories = Category::whereNotNull('parent_id')->pluck('categorie', 'id');
+        return view('admin.products.edit', compact('categories'))->with('product', $product);
     }
 
     /**
@@ -130,16 +131,21 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy()
     {
-        //TODO Check if person is allowed to delete the module
+        if(!auth()->user()->isAdmin()){
+            return Redirect('/');
+        }
 
-        // Set module 'deleted'
+        // Get product
+        $product = Product::find(request()->id);
+
+        // Set product 'deleted'
         $product->delete();
         
         // Return to the page with a message
         Session::flash('msg', 'Product verwijderd');
-        return Redirect::to('/');
+        return back();
     }
 
     public function filter() {
