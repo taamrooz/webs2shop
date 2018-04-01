@@ -57,6 +57,8 @@ a {
 .breadcrumb {
     width: var(--centerWidth);
     padding: 10px 0 0 10px;
+    text-decoration: blink;
+    color: blue;
 }
 
 .breadcrumb-item {
@@ -71,6 +73,7 @@ a {
 
 .breadcrumb li:not(:last-child):after {
     content: ' > ';
+    color: grey;
 }
 
 /* Nav */
