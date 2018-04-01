@@ -11,7 +11,7 @@
 				?>
 
 				<div class="card product">
-					<img class="card-img" src="http://via.placeholder.com/350x225" alt="{{ $product->titel }}">
+					<img style="max-width: 100%;max-height: 100%;" class="card-img" src="{{ asset('storage/'. $product->imageurl)}}" alt="{{ $product->titel }}">
 					<h3>{{ $shorttitle }}</h3>
 					<p>{{ $short }}</p>
 					<div class="product_options">
