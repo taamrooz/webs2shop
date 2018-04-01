@@ -16,6 +16,15 @@ Route::get('/', function () {
 	return view('home');
 });
 
+/* User */
+Route::get('/inloggen', 'SessionsController@create');
+Route::post('/inloggen', 'SessionsController@store');
+Route::get('/uitloggen', 'SessionsController@destroy');
+Route::get('/registreren', 'RegistrationController@create');
+Route::post('/registreren', 'RegistrationController@store');
+Route::get('/account', 'RegistrationController@show');
+
+// Producten
 Route::get('/producten', 'ProductController@index');
 Route::post('/producten', 'ProductController@filter');
 Route::get('/producten/{product}', 'ProductController@show');
@@ -27,6 +36,11 @@ Route::get('/winkelwagen', 'ShoppingCartController@index');
 Route::get('/winkelwagen/{id}/verwijder', 'ShoppingCartController@remove');
 Route::post('/winkelwagen/bijwerken', 'ShoppingCartController@edit');
 Route::get('/winkelwagen/leegmaken', 'ShoppingCartController@destroy');
+Route::get('/winkelwagen/bestellen', 'ShoppingCartController@order');
+
+// Bestellingen
+Route::get('/orders', 'OrderController@index');
+Route::get('/orders/{order}', 'OrderController@show');
 
 // Admin
 Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {
@@ -63,18 +77,6 @@ Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {
 	Route::patch('orders/{order}', ['as' => 'admin.orders.update', 'uses' => 'OrderController@update']);
 	Route::post('orders/verwijder', 'OrderController@destroy');
 });
-
-/* User */
-Route::get('/inloggen', 'SessionsController@create');
-Route::post('/inloggen', 'SessionsController@store');
-Route::get('/uitloggen', 'SessionsController@destroy');
-
-Route::get('/registreren', 'RegistrationController@create');
-Route::post('/registreren', 'RegistrationController@store');
-
-Route::get('/account', 'RegistrationController@show');
-
-
 
 Auth::routes();
 
