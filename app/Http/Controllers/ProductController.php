@@ -102,7 +102,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.products.edit')->with('product', $product);
+        $categories = Category::whereNotNull('parent_id')->pluck('categorie', 'id');
+        return view('admin.products.edit', compact('categories'))->with('product', $product);
     }
 
     /**

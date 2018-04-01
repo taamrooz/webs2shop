@@ -32,11 +32,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
     public function isAdmin()
     {
         return (\Auth::check() && $this->user_level === 2);
     }
-
 
     public function cart() {
         return $this->hasMany(ShoppingCart::class);
