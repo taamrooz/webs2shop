@@ -82,7 +82,7 @@ class ProductController extends Controller
         $imageFileName = $product->titel. '.' .$image->getClientOriginalExtension();
         
         $filePath = '/products/' . $imageFileName;
-        $s3 = \AWS::createClient('s3');
+        $s3 = Storage::disk('s3');
         $s3->putObject(array('Bucket' => 'webs2shop',
                              'Key' => $imageFileName,
                              'SourceFile' => $image,
