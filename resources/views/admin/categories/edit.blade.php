@@ -6,17 +6,27 @@
 
 	<div class="col-lg-9">
 		<h1>&nbsp;</h1>
-		{{ Form::model($category, ['route' => ['admin.categorieen.update', $category->categorie], 'method' => 'PATCH']) }}
+		<form method="post" action="/admin/categorieen/aanpassen">
+			{{ csrf_field() }}
+			<div class="form-group row">
+				{{ Form::label('categorie', 'Categorie', ['class'=>'col-sm-2 col-form-label']) }}
+				<input type="text" value="{{ $category->categorie }}" name="categorie">
+				<input type="hidden" name="id" value="{{ $category->id }}">
+				<select name="parent_id">
+					<option value="">Nieuwe hoofdcategorie</option {{ ($category->id == null)?'.selected="selected".': ''}}>
 
-		<div class="form-group row">
-            {{ Form::label('categorie', 'Categorie', ['class'=>'col-sm-2 col-form-label']) }}
-            {{ Form::text('categorie', null, ['class'=>'form-control col-sm-10', 'placeholder'=>'Categorie']) }}
-            @if($errors->has('categorie'))
-                <div class="alert alert-danger">{{ $errors->first('categorie') }}</div>
-            @endif
-        </div>
-		<div class="form-group">
-			{{ Form::submit('Update', ['class' => 'btn btn-success'])}}
+					@foreach($categories as $categorie)
+						@if($category->id != $categorie->id)
+							<option value="{{ $categorie->id }}" >{{ $categorie->categorie }}</option>
+						@endif
+					@endforeach
+				</select>
+				<input type="submit" value="Aanpassen">
+				@if($errors->has('categorie'))
+					<div class="alert alert-danger">{{ $errors->first('categorie') }}</div>
+				@endif
+			</div>
+		</form>
 		</div>
 	</div>
 

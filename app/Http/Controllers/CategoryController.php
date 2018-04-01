@@ -72,7 +72,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.categories.edit')->with('category', $category);
+        $categories = Category::whereNull('parent_id')->get();
+        return view('admin.categories.edit', compact('categories'))->with('category', $category);
     }
 
     /**
@@ -82,9 +83,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Category $category)
+    public function update()
     {
+        $category = Category::find(request()->id);
         $category->categorie = request()->categorie;
+        $category->parent_id = request()->parent_id;
         $category->save();
         Session::flash('msg', 'Categorie geüpdatet!');
         return Redirect::to('/');
