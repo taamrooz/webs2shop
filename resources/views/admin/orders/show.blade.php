@@ -7,9 +7,9 @@
         <div class="order_information">
             <h3 class="card-title">Order id: {{$order->id}}</h3>
             @if(Auth::user()->isAdmin())
-                <h4>Besteld door: {{$order->user->name}}</h4>
+                <h4>Besteld door: <a href="/admin/gebruikers/{{ $order->user->id }}">{{$order->user->name}}</a></h4>
                 <small>Klantnummer: {{ $order->user->id }}</small>
-                <strong>Lijst met producten</strong>
+                <hr>
             @endif
 
             <table>
@@ -22,7 +22,7 @@
                 @foreach($order->order_products()->get() as $order_product)
                     <?php $product = DB::table('products')->find($order_product->product_id) ?>
                     <tr>
-                        <td><b>{{ $product->titel }}</b></td>
+                        <td><b><a href="/producten/{{ $product->id }}">{{ $product->titel }}</a></b></td>
                         <td>{{ $order_product->amount }}</td>
                         <td>{{ $product->prijs * $order_product->amount }}</td>
                     </tr>

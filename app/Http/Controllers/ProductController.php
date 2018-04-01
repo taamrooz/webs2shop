@@ -32,11 +32,29 @@ class ProductController extends Controller
 
         }
 
+        // Get all categories
         $categories = \DB::table('categories')->whereNull('parent_id')->get();
 
+        // Get all sub categories
         foreach($categories as $category) {
             $subCategories[$category->id] = \DB::table('categories')->where('parent_id', '=', $category->id)->get();
         }
+
+        // Check if category has products
+        /*$i=0;
+        foreach($categories as $category){
+
+            $used = false;
+            foreach($subCategories as $subCategory){
+                if($subCategory->parent_id === $category->id){
+                    $used = true;
+                }
+            }
+            if(!$used){
+                unset($categories[$i]);
+            }
+            $i++;
+        }*/
 
         // Check if filter exists
         if (session()->has('filter')) {

@@ -39,18 +39,23 @@ class CategoryController extends Controller
      */
     public function store()
     {
-        if(Category::where('categorie', '===', request()->categorie)->get() !== null){
+        //Check if category already exists
+        if(Category::where('categorie', '=', request()->categorie)->first() !== null){
             Session::flash('warning', 'Categorie bestaat al!');
             return back();
         }
+
+        // make new category
         $category = new Category();
         $category->categorie = request()->categorie;
+
         if(isset(request()->parent_id)){
             $category->parent_id = request()->parent_id;
         }
+
         $category->save();
         Session::flash('msg', 'Categorie aangemaakt!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/categorieen');
     }
 
     /**
@@ -96,15 +101,26 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy()
     {
-        //TODO Check if person is allowed to delete the module
+        if(!auth()->user()->isAdmin()){
+            return Redirect('/');
+        }
 
-        // Set module 'deleted'
+        // Get category
+        $category = Category::find(request()->id);
+
+        //Get and delete all subcategories
+        $subs = Category::where('parent_id', '=', $category->id)->get();
+        foreach($subs as $sub){
+            $sub->delete();
+        }
+
+        // Set category 'deleted'
         $category->delete();
         
         // Return to the page with a message
         Session::flash('msg', 'Categorie verwijderd');
-        return Redirect::to('/');
+        return Redirect::to('/admin/categorieen');
     }
 }

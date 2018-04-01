@@ -8,6 +8,11 @@
 				<div class="card category">
 					<h3>{{ $category->categorie }}</h3>
 					<div class="product_options">
+						<form method="post" action="/admin/categorieen/verwijder">
+							{{ csrf_field() }}
+							<input type="hidden" value="{{ $category->id }}" name="id">
+							<button type="submit">Verwijder</button>
+						</form>
 						<a class="inspect btn" href="{{ URL::to('/admin/categorieen/'.$category->categorie ) }}">Bekijk</a>
 						<a class="inspect btn" href="{{ URL::to('/admin/categorieen/' . $category->id . '/aanpassen') }}">Aanpassen</a>
 					</div>
