@@ -70,6 +70,7 @@ a {
     color: grey;
     font-weight: bold;
 }
+
 .breadcrumb li:not(:last-child):after {
     content: ' > ';
     color: grey;
