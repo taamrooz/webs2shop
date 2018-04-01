@@ -737,7 +737,6 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
->>>>>>> S3
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
