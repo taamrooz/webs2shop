@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('content')
+{{ Breadcrumbs::render('categoryedit', $category) }}
 	<h1>Categorie aanpassen</h1>
 
 	<div class="col-lg-9">

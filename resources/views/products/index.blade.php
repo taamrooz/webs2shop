@@ -59,7 +59,7 @@
 					?>
 
 					<div class="card product" data-title="{{ $product->titel }}" data-price="{{ $product->prijs }}" data-category="{{ $product->category }}">
-						<img class="card-img" src="http://via.placeholder.com/350x225" alt="{{ $product->titel }}">
+						<img class="card-img" src="{{ asset('storage/'. $product->imageurl)}}" alt="{{ $product->titel }}">
 						<h3>{{ $product->titel }}</h3>
 						<p>{{ $short }}</p>
 						<div class="product_options">

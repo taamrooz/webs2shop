@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('content')
+{{ Breadcrumbs::render('useredit', $user) }}
 	<h1>Gebruiker aanpassen</h1>
 
 	<div class="col-lg-9">
@@ -38,7 +39,7 @@
         </div>
         <div class="form-group row">
             {{ Form::label('user_level', 'Gebruiker level', ['class'=>'col-sm-2 col-form-label']) }}
-            {{ Form::text('user_level', '', ['class'=>'form-control col-sm-10', 'placeholder'=>'Gebruiker level']) }}
+            {{ Form::selectRange('user_level', 1,2) }}
             @if($errors->has('user_level'))
                 <div class="alert alert-danger">{{ $errors->first('user_level') }}</div>
             @endif

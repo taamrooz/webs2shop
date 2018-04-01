@@ -19,7 +19,8 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('titel');
             $table->text('beschrijving');
-            $table->decimal('prijs', 5, 2);
+            $table->string('imageurl');
+            $table->decimal('prijs', 8, 2);
             $table->timestamps();
         });
     }

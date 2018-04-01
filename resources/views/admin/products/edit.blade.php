@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('content')
+{{ Breadcrumbs::render('productedit', $product) }}
 	<h1>Product aanpassen</h1>
 
 	<div class="col-lg-9">

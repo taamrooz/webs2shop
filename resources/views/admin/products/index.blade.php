@@ -2,6 +2,7 @@
 @section('content')
 {{ Breadcrumbs::render('adminproducts') }}
 	<div class="">
+		<a class="inspect btn" href="{{ URL::to('/admin/producten/aanmaken') }}">Aanmaken</a>
 		<div class="products">
 			@foreach($products as $product)
 				<?php

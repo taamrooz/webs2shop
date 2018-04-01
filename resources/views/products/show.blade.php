@@ -4,10 +4,10 @@
 {{ Breadcrumbs::render('product', $product) }}
 <div class="row">
     <div class="card">
-        @if($product->image == null)
+        @if($product->imageurl == null)
         <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
         @else
-        <img class="card-img-top img-fluid show-banner" src="data:image/gif;base64,{{$product->image}}"
+        <img class="card-img-top img-fluid show-banner" src="{{ asset('storage/'. $product->imageurl)}}"
         alt="">
         @endif
         <div class="product_information">

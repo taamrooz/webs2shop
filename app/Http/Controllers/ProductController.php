@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -25,7 +27,6 @@ class ProductController extends Controller
             if (!in_array($product->category_id.'', $category_ids)){
 
                 $category_ids[] = $product->category_id;
-
             }
 
         }
@@ -60,7 +61,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = Category::pluck('categorie', 'id');
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -75,6 +77,8 @@ class ProductController extends Controller
         $product->titel = $request->titel;
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
+        $product->category_id = $request->category_id;
+        $product->imageurl = Storage::putFile('products', new File($request->image));
         $product->save();
         Session::flash('msg', 'Product aangemaakt!');
         return Redirect::to('/');
