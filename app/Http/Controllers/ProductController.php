@@ -78,7 +78,7 @@ class ProductController extends Controller
         $product->prijs = $request->prijs;
         $product->category_id = $request->category_id;
         $image = $request->file('image');
-        $imageFileName = $product->titel. '.' $image->getClientOriginalExtension();
+        $imageFileName = $product->titel. '.' .$image->getClientOriginalExtension();
         $s3 = Storage::disk('s3');
         $filePath = '/products/' . $imageFileName;
         $s3->put($filePath, file_get_contents($image), 'public');
