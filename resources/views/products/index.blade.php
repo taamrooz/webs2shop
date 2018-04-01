@@ -97,15 +97,14 @@
 			}).then(okay => {
 
 				if(okay) {
-						// Delete module
-						$('#' + id).submit();
-					}
-					// Cancel
-					return;
+					// Delete module
+					$('#' + id).submit();
+				}
+				// Cancel
+				return;
 
-				});
+			});
 		});
-
 
 		// Filter using some magic
         $(document).ready(function(){
@@ -116,7 +115,7 @@
 						$(this).show();
 					}
 					var title = $(this).data('title').toLowerCase();
-					if(title.search(input) !== 0){
+					if(~title.indexOf(input) >= 0){
 					   $(this).hide();
 					}else{
 					   $(this).show();
