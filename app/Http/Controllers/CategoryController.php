@@ -37,7 +37,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(CategoryRequest $request)
     {
         //Check if category already exists
         if(Category::where('categorie', '=', request()->categorie)->first() !== null){
@@ -47,10 +47,9 @@ class CategoryController extends Controller
 
         // make new category
         $category = new Category();
-        $category->categorie = request()->categorie;
-
-        if(isset(request()->parent_id)){
-            $category->parent_id = request()->parent_id;
+        $category->categorie = $request->categorie;
+        if(isset($request->parent_id)){
+            $category->parent_id = $request->parent_id;
         }
 
         $category->save();
@@ -87,9 +86,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $category->categorie = request()->categorie;
+        $category->categorie = $request->categorie;
+        if(isset($request->parent_id)){
+            $category->parent_id = $request->parent_id;
+        }
         $category->save();
         Session::flash('msg', 'Categorie geüpdatet!');
         return Redirect::to('/');
