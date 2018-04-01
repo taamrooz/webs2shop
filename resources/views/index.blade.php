@@ -156,17 +156,6 @@
                     }
                 });
 
-
-
-
-
-                // TODO fix bug met hamburger, mag niet terug springen op kruisje wanneer terug naar kleiner dan 641px
-
-
-
-
-
-
                 /* Toggle the hamburger animation */
                 $('#toggleMenu').click(function(){
                     $(this).toggleClass('open');

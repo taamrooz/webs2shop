@@ -473,6 +473,19 @@ header {
     background-color: var(--redHover);
 }
 
+.login a{
+    padding: 2px;
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.login small{
+    border: none;
+    margin: 0 auto;
+    padding: 0;
+    width: fit-content;
+}
 /* Account */
 .account {
     display: flex;

@@ -112,13 +112,15 @@
             $('.search').on('keyup', function(){
                 var input = $(this).val().toLowerCase();
                 $('.products .product').each(function(){
-                   var title = $(this).data('title').toLowerCase();
-                   console.log(title);
-                   if(title.search(input) !== 0){
-                       $(this).hide();
-                   }else{
-                       $(this).show();
-                   }
+					if(input === ''){
+						$(this).show();
+					}
+					var title = $(this).data('title').toLowerCase();
+					if(title.search(input) !== 0){
+					   $(this).hide();
+					}else{
+					   $(this).show();
+					}
                 });
             });
         });

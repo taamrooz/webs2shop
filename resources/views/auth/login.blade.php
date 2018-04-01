@@ -14,6 +14,7 @@
                         {{ $errors->first('message') }}
                     </span>
                 @endif
+                <small>Nieuwe gebruiker?<br><a href="/registreren">Maak een nieuw account aan.</a></small>
                 <input type="submit" value="Inloggen" class="btn">
             </form>
         </div>
