@@ -27,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        $categories = Category::whereNull('parent_id')->get();
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -36,10 +37,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store()
     {
+        if(Category::where('categorie', '===', request()->categorie)->get() !== null){
+            Session::flash('warning', 'Categorie bestaat al!');
+            return back();
+        }
         $category = new Category();
-        $category->categorie = $request->categorie;
+        $category->categorie = request()->categorie;
+        if(isset(request()->parent_id)){
+            $category->parent_id = request()->parent_id;
+        }
         $category->save();
         Session::flash('msg', 'Categorie aangemaakt!');
         return Redirect::to('/');

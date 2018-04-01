@@ -470,6 +470,10 @@ header {
     color: var(--red);
 }
 
+.login .invalid-feedback strong{
+    border: none;
+}
+
 .login .btn {
     background-color: var(--red);
     transition: 0.3s;
