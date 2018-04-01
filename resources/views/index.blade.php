@@ -12,7 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         {{-- CSS --}}
-        <link href="{{ asset('css/index.css') }}" rel="stylesheet" type="text/css">
+        {{ Html::style('css/index.css') }}
 
         {{-- JQuery --}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
