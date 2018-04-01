@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Order;
+use App\OrderProduct;
 
 class ShoppingCartController extends Controller
 {
@@ -101,6 +103,40 @@ class ShoppingCartController extends Controller
 
         // Send user back to shopping cart
         return redirect('/winkelwagen');
+
+    }
+
+    public function order() {
+
+        // Check if user is logged in
+        if(\Auth::user() == null){
+
+            \Session::flash('warning', 'Je moet eerst inloggen!');
+            return Redirect('/inloggen');
+
+        }
+
+        // Create order
+        $order = new Order();
+        $order->user_id = \Auth::user()->id;
+
+        // Save order
+        $order->save();
+
+        // Store ordered products
+        foreach($this->getCart() as $item => $amount){
+            $order_product = new OrderProduct();
+            $order_product->order_id = $order->id;
+            $order_product->product_id = $item;
+            $order_product->amount = $amount;
+            $order_product->save();
+        }
+
+        // Remove shopping cart session
+        session()->forget('cart');
+
+        // Send user to his order page
+        return Redirect('/orders/'.$order->id);
 
     }
 

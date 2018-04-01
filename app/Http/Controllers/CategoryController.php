@@ -82,9 +82,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(Category $category)
     {
-        $category->categorie = $request->categorie;
+        $category->categorie = request()->categorie;
         $category->save();
         Session::flash('msg', 'Categorie geüpdatet!');
         return Redirect::to('/');
