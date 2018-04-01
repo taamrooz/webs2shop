@@ -506,7 +506,6 @@
             "time": "2018-02-07T20:20:57+00:00"
         },
         {
-<<<<<<< aca82292122c5e6b321b53c8cbacbf5cc45937d2
             "name": "fzaninotto/faker",
             "version": "v1.7.1",
             "source": {
@@ -557,10 +556,6 @@
             "time": "2017-08-15T16:48:10+00:00"
         },
         {
-<<<<<<< a194b12dcbb8f918a9646d262f086301c6229624
-=======
->>>>>>> Procfile
-=======
             "name": "guzzlehttp/guzzle",
             "version": "6.3.2",
             "source": {
