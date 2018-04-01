@@ -61,6 +61,12 @@ a {
 
 .breadcrumb-item {
     display: inline;
+    text-decoration: blink;
+    color: blue;
+}
+.breadcrumb-item +.active {
+    text-decoration: none;
+    color: grey;
 }
 
 /* Nav */

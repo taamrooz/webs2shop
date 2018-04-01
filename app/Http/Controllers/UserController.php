@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -84,7 +84,7 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         Session::flash('msg', 'Gebruiker geüpdatet!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/gebruikers');
     }
 
     /**

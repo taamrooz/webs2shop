@@ -44,12 +44,8 @@ class OrderController extends Controller
     {
         $order = new Order();
         $order->user_id = $request->user_id;
-        foreach ($request->products as $product) {
-            $order->pivot->order_id = $order->id;
-            $order->pivot->product_id = $product;
-        }
-        $order->pivot->save();
         $order->save();
+        $order->products()->attach($request->products);
         Session::flash('msg', 'Order aangemaakt!');
         return Redirect::to('/admin/orders');
     }
@@ -62,7 +58,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('admin.orders.show', compact('order'));
     }
 
     /**
@@ -87,7 +83,12 @@ class OrderController extends Controller
      */
     public function update(OrderRequest $request, Order $order)
     {
-        //
+        $order->user_id = $request->user_id;
+        $order->save();
+        $order->products()->detach();
+        $order->products()->attach($request->products);
+        Session::flash('msg', 'Order geupdatet!');
+        return Redirect::to('/admin/orders');
     }
 
     /**

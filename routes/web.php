@@ -34,29 +34,32 @@ Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {
 	//Products
 	Route::get('producten','AdminController@products');
 	Route::get('producten/aanmaken', 'ProductController@create');
-	Route::post('producten/opslaan', 'ProductController@store');
+	Route::post('producten/aanmaken', 'ProductController@store');
 	Route::get('producten/{product}/aanpassen', 'ProductController@edit');
 	Route::patch('producten/{product}', ['as' => 'admin.producten.update', 'uses' => 'ProductController@update']);
 	Route::post('products/verwijder', 'ProductController@destroy');
 	//Categories
 	Route::get('categorieen', 'CategoryController@index');
 	Route::get('categorieen/aanmaken', 'CategoryController@create');
-	Route::post('categorieen/opslaan', 'CategoryController@store');
+	Route::post('categorieen/aanmaken', 'CategoryController@store');
 	Route::get('categorieen/{category}/aanpassen', 'CategoryController@edit');
+	Route::get('categorieen/{category}', 'CategoryController@show');
 	Route::patch('categorieen/{category}', ['as' => 'admin.categorieen.update', 'uses' => 'CategoryController@update']);
 	Route::post('categorieen/verwijder', 'CategoryController@destroy');
 	//Users
 	Route::get('gebruikers', 'UserController@index');
 	Route::get('gebruikers/aanmaken', 'UserController@create');
-	Route::post('gebruikers/opslaan', 'UserController@store');
+	Route::post('gebruikers/aanmaken', 'UserController@store');
 	Route::get('gebruikers/{user}/aanpassen', 'UserController@edit');
+	Route::get('gebruikers/{user}', 'UserController@show');
 	Route::patch('gebruikers/{user}', ['as' => 'admin.gebruikers.update', 'uses' => 'UserController@update']);
 	Route::post('gebruikers/verwijder', 'UserController@destroy');
 	//Orders
 	Route::get('orders', 'OrderController@index');
 	Route::get('orders/aanmaken', 'OrderController@create');
-	Route::post('orders/opslaan', 'OrderController@store');
+	Route::post('orders/aanmaken', 'OrderController@store');
 	Route::get('orders/{order}/aanpassen', 'OrderController@edit');
+	Route::get('orders/{order}', 'OrderController@show');
 	Route::patch('orders/{order}', ['as' => 'admin.orders.update', 'uses' => 'OrderController@update']);
 	Route::post('orders/verwijder', 'OrderController@destroy');
 });

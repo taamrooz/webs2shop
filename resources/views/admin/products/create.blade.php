@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('content')
+{{ Breadcrumbs::render('productcreate') }}
     <h1>Nieuw product aanmaken</h1>
 
     <div class="col-lg-9">

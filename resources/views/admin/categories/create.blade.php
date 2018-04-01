@@ -1,6 +1,7 @@
 @extends('index')
 
 @section('content')
+{{ Breadcrumbs::render('categorycreate') }}
     <h1>Nieuwe categorie aanmaken</h1>
 
     <div class="col-lg-9">

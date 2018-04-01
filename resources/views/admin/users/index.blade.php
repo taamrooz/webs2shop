@@ -2,13 +2,14 @@
 @section('content')
 {{ Breadcrumbs::render('adminusers') }}
 	<div class="">
+		<a class="inspect btn" href="{{ URL::to('/admin/gebruikers/aanmaken') }}">Aanmaken</a>
 		<div class="products">
 			@foreach($users as $user)
 				<div class="col-md-7 card">
 					<h3>{{ $user->name }}</h3>
 					<p>{{ $user->email }}</p>
 					<div class="product_options">
-						<a class="inspect btn" href="{{ URL::to('/admin/'.$user->id ) }}">Bekijk</a>
+						<a class="inspect btn" href="{{ URL::to('/admin/gebruikers/'.$user->id ) }}">Bekijk</a>
 						<a class="inspect btn" href="{{ URL::to('/admin/gebruikers/' . $user->id . '/aanpassen') }}">Aanpassen</a>
 					</div>
 				</div>

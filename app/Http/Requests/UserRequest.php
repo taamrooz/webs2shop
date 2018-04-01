@@ -33,14 +33,12 @@ class UserRequest extends FormRequest
                 'name' => 'required|string|max:100',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:6|confirmed',
-                'user_level' => 'required|digits_between:1,2'
             ];
             case 'PATCH':
             return [
                 'name' => 'required|string|max:100',
                 'email' => 'required|email',
                 'password' => 'required|string|min:6|confirmed'
-                'user_level' => 'required|digits_between:1,2'
             ];
             break;
             
@@ -49,7 +47,6 @@ class UserRequest extends FormRequest
                 'name' => 'required|string|max:100',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:6|confirmed'
-                'user_level' => 'required|digits_between:1,2'
             ];
             
         }
@@ -70,9 +67,6 @@ class UserRequest extends FormRequest
             'password.string' => 'Het wachtwoord mag alleen bestaan uit karakters.',
             'password.min' => 'Het wachtwoord moet tenminste bestaan uit 6 karakters',
             'password.confirmed' => 'De wachtwoorden komen niet overeen',
-
-            'user_level.required' => 'Je moet een gebruiker level meegeven',
-            'user_level.digits_between' => 'Het gebruikers level is :min of :max',
         ];
     }
 }
