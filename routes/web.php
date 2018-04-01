@@ -57,9 +57,8 @@ Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {
 	Route::get('categorieen/aanmaken', 'CategoryController@create');
 	Route::post('categorieen/aanmaken', 'CategoryController@store');
 	Route::get('categorieen/{category}/aanpassen', 'CategoryController@edit');
-	Route::get('categorieen/{category}', 'CategoryController@show');
-	Route::post('categorieen/aanpassen', 'CategoryController@update');
-	//Route::patch('categorieen/{category}', ['as' => 'admin.categorieen.update', 'uses' => 'CategoryController@update']);
+    Route::post('categorieen/aanpassen', 'CategoryController@update');
+    Route::get('categorieen/{category}', 'CategoryController@show');
 	Route::post('categorieen/verwijder', 'CategoryController@destroy');
 	//Users
 	Route::get('gebruikers', 'UserController@index');
