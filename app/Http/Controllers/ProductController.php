@@ -38,8 +38,6 @@ class ProductController extends Controller
             $subCategories[$category->id] = \DB::table('categories')->where('parent_id', '=', $category->id)->get();
         }
 
-        //dd($categories, $subCategories);
-
         // Check if filter exists
         if (session()->has('filter')) {
 
@@ -62,7 +60,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('categorie', 'id');
+        $categories = Category::whereNotNull('parent_id')->pluck('categorie', 'id');
         return view('admin.products.create', compact('categories'));
     }
 

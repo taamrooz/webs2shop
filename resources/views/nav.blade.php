@@ -11,17 +11,6 @@
                         <span><b>Ackerwildkrauter</b></span>
                     </a>
                 </li>
-                {{--@foreach($menuItems as $menuItem)
-                    @if($menuItem->user_level >= 1)
-                        @if(Auth::user() !== null)
-                            @if(Auth::user()->isAdmin())
-                                <li class="{{ Request::is('admin') || Request::is('admin/*') ? 'active' : '' }}"><a href="/admin">Admin</a></li>
-                            @endif
-                        @endif
-                    @else
-                        <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
-                    @endif
-                @endforeach--}}
                 <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
                 <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen">Winkelwagen</a></li>
                 @if(Auth::user() !== null)

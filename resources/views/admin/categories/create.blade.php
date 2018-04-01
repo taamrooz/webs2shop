@@ -11,6 +11,12 @@
         <div class="form-group row">
             {{ Form::label('categorie', 'Categorie', ['class'=>'col-sm-2 col-form-label']) }}
             {{ Form::text('categorie', null, ['class'=>'form-control col-sm-10', 'placeholder'=>'Categorie']) }}
+            <select name="parent_id">
+                <option value="">Nieuwe hoofdcategorie</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->categorie }}</option>
+                @endforeach
+            </select>
             @if($errors->has('categorie'))
                 <div class="alert alert-danger">{{ $errors->first('categorie') }}</div>
             @endif
