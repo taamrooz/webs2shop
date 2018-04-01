@@ -40,12 +40,27 @@
         </label>
         <input type="checkbox" name="toggleMenuInput" id="toggleMenuInput"/>
 
+        {{-- Get the kind of user --}}
+        <?php
+        if(Auth::user() === null) {
+            $userLevel = 0;
+        }else{
+            if(Auth::user()->isAdmin()){
+                $userLevel = 2;
+            }else{
+                $userLevel = 1;
+            }
+        }
+        ?>
+
         {{-- Menu in sidebar --}}
         <div class="sideBar disable_scroll_main_page">
             <ul>
-                <li class="{{ Request::is('producten') || Request::is('producten/*') ? 'active' : '' }}"><a href="/producten">Producten</a></li>
-                <li class="{{ Request::is('winkelwagen') || Request::is('winkelwagen/*') ? 'active' : '' }}"><a href="/winkelwagen" >Winkelwagen</a></li>
-                <li class="{{ Request::is('inloggen') ? 'active' : '' }}"><a href="/login">Inloggen</a></li>
+                @foreach(DB::table('menu')->get() as $menuItem)
+                    @if($userLevel == $menuItem->user_level || $menuItem->user_level == 10 || ($userLevel > 1 && $menuItem->user_level >= 1))
+                        <li class="{{ Request::is($menuItem->path) || Request::is($menuItem->path.'/*') ? 'active' : '' }}"><a href="/{{ $menuItem->path }}">{{ $menuItem->label }}</a></li>
+                    @endif
+                @endforeach
             </ul>
         </div>
 
@@ -62,20 +77,9 @@
                                 <span><b>Ackerwildkrauter</b></span>
                             </a>
                         </li>
-                        <?php
-                            if(Auth::user() === null) {
-                                $userLevel = 0;
-                            }else{
-                                if(Auth::user()->isAdmin()){
-                                    $userLevel = 2;
-                                }else{
-                                    $userLevel = 1;
-                                }
-                            }
-                        ?>
                         @foreach(DB::table('menu')->get() as $menuItem)
                             @if($userLevel == $menuItem->user_level || $menuItem->user_level == 10 || ($userLevel > 1 && $menuItem->user_level >= 1))
-                                <li class="{{ Request::is($menuItem->path) || Request::is($menuItem->path.'/*') ? 'active' : '' }}"><a href="{{ $menuItem->path }}">{{ $menuItem->label }}</a></li>
+                                <li class="{{ Request::is($menuItem->path) || Request::is($menuItem->path.'/*') ? 'active' : '' }}"><a href="/{{ $menuItem->path }}">{{ $menuItem->label }}</a></li>
                             @endif
                         @endforeach
                     </ul>
