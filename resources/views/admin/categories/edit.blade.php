@@ -20,10 +20,10 @@
 						<td><label for="sub">Is subcategorie van:</label></td>
 						<td>
 							<select id="sub" name="parent_id">
-								<option value="">Nieuwe hoofdcategorie</option {{ ($category->id == null)?'.selected="selected".': ''}}>
+								<option value="" {{ ($category->parent_id === null)? 'selected="selected"' : '' }}>Nieuwe hoofdcategorie</option>
 								@foreach($categories as $categorie)
 									@if($category->id != $categorie->id)
-										<option value="{{ $categorie->id }}" >{{ $categorie->categorie }}</option>
+										<option value="{{ $categorie->id }}" {{ ($category->parent_id == $categorie->id) ? 'selected="selected"' : '' }}>{{ $categorie->categorie }}</option>
 									@endif
 								@endforeach
 							</select>
