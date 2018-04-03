@@ -133,7 +133,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //TODO Check if person is allowed to delete the module
+
 
         // Set module 'deleted'
         $product->delete();
