@@ -8,7 +8,7 @@
 				<div class="card category">
 					<h3>{{ $category->categorie }}</h3>
 					<div class="product_options">
-						<a class="inspect btn" href="{{ URL::to('/admin/categorieen/'.$category->categorie ) }}">Bekijk</a>
+
 						<a class="inspect btn" href="{{ URL::to('/admin/categorieen/' . $category->id . '/aanpassen') }}">Aanpassen</a>
 					</div>
 				</div>

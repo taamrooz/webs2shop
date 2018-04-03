@@ -39,23 +39,22 @@ class CategoryController extends Controller
      */
     public function store()
     {
-        // Check if category already exsists
-        if(Category::where('categorie', '===', request()->categorie)->get() !== null){
+        //Check if category already exists
+        if(Category::where('categorie', '=', request()->categorie)->first() !== null){
             Session::flash('warning', 'Categorie bestaat al!');
             return back();
         }
 
-        // Create category
+        // make new category
         $category = new Category();
         $category->categorie = request()->categorie;
         if(isset(request()->parent_id)){
             $category->parent_id = request()->parent_id;
         }
 
-        // Save and return
         $category->save();
         Session::flash('msg', 'Categorie aangemaakt!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/categorieen');
     }
 
     /**
@@ -95,7 +94,7 @@ class CategoryController extends Controller
         $category->parent_id = request()->parent_id;
         $category->save();
         Session::flash('msg', 'Categorie geüpdatet!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/categorieen');
     }
 
     /**
