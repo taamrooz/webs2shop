@@ -103,15 +103,27 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
-    {
-        //TODO Check if person is allowed to delete the module
+    public function destroy() {
 
-        // Set module 'deleted'
+        // Check if user is admin
+        if(!auth()->user()->isAdmin()){
+            return Redirect('/');
+        }
+
+        // Get category
+        $category = Category::find(request()->id);
+
+        //Get and delete all subcategories
+        $subs = Category::where('parent_id', '=', $category->id)->get();
+        foreach($subs as $sub){
+            $sub->delete();
+        }
+
+        // Set category 'deleted'
         $category->delete();
-        
+
         // Return to the page with a message
         Session::flash('msg', 'Categorie verwijderd');
-        return Redirect::to('/');
+        return Redirect::to('/admin/categorieen');
     }
 }
