@@ -48,6 +48,11 @@ a {
     color: inherit;
 }
 
+table{
+    border-spacing: 5px;
+    border-collapse: separate;
+}
+
 .btn {
     font-weight: bold;
     padding: 8px;
@@ -537,11 +542,8 @@ header {
 }
 
 .cart table{
-    border-spacing: 5px;
-    border-collapse: separate;
     width: 100%;
 }
-
 
 /* Footer */
 footer {
