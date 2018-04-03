@@ -39,15 +39,20 @@ class CategoryController extends Controller
      */
     public function store()
     {
+        // Check if category already exsists
         if(Category::where('categorie', '===', request()->categorie)->get() !== null){
             Session::flash('warning', 'Categorie bestaat al!');
             return back();
         }
+
+        // Create category
         $category = new Category();
         $category->categorie = request()->categorie;
         if(isset(request()->parent_id)){
             $category->parent_id = request()->parent_id;
         }
+
+        // Save and return
         $category->save();
         Session::flash('msg', 'Categorie aangemaakt!');
         return Redirect::to('/');
