@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+	protected $fillable = [
+        'imageurl'
+    ];
     public function orders()
     {
     	return $this->belongsToMany(Order::class);

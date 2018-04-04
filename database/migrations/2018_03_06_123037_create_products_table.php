@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('titel');
             $table->text('beschrijving');
-            $table->string('imageurl');
+            $table->string('imageurl')->nullable();
             $table->decimal('prijs', 8, 2);
             $table->timestamps();
         });
@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('order_product');
         Schema::dropIfExists('product');
     }
 }

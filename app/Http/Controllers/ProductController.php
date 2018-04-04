@@ -77,10 +77,17 @@ class ProductController extends Controller
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
         $product->category_id = $request->category_id;
-        $product->imageurl = Storage::putFile('products', new File($request->image));
         $product->save();
+
+        $image = $request->file('image');
+        $imageFileName = $product->id . '.' . $image->getClientOriginalExtension();
+        $filePath = '/products/' . $imageFileName;
+        $s3 = Storage::disk('s3');
+        $s3->put($filePath, file_get_contents($image), 'public');
+        $product->update(['imageurl' => 'https://webs2shop.s3-eu-west-2.amazonaws.com' . $filePath]);
+
         Session::flash('msg', 'Product aangemaakt!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/producten');
     }
 
     /**
@@ -119,10 +126,17 @@ class ProductController extends Controller
         $product->beschrijving = $request->beschrijving;
         $product->prijs = $request->prijs;
         $product->category_id = $request->category_id;
-        $product->imageurl = Storage::putFile('products', new File($request->image));
         $product->save();
+
+        $image = $request->file('image');
+        $imageFileName = $product->id . '.' . $image->getClientOriginalExtension();
+        $filePath = '/products/' . $imageFileName;
+        $s3 = Storage::disk('s3');
+        $s3->put($filePath, file_get_contents($image), 'public');
+        $product->update(['imageurl' => 'https://webs2shop.s3-eu-west-2.amazonaws.com' . $filePath]);
+
         Session::flash('msg', 'Product geüpdatet!');
-        return Redirect::to('/');
+        return Redirect::to('/admin/producten');
     }
 
     /**
@@ -133,14 +147,14 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-
-
+        $extension = pathinfo($product->imageurl, PATHINFO_EXTENSION);
+        Storage::delete($product->id . $extension);
         // Set module 'deleted'
         $product->delete();
         
         // Return to the page with a message
         Session::flash('msg', 'Product verwijderd');
-        return Redirect::to('/');
+        return Redirect::to('/admin/producten');
     }
 
     public function filter() {

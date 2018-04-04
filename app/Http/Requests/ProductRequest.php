@@ -26,12 +26,32 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'titel' => 'required|string|max:40',
-            'beschrijving' => 'required|string|max:2000',
-            'prijs' => 'required|numeric',
-            'image' => 'required|mimes:jpeg,png,bmp,tiff|max:4096'
-        ];
+        switch ($this->method()) {
+            case 'POST':
+            return [
+                'titel' => 'required|string|max:60|unique:products,titel',
+                'beschrijving' => 'required|string|max:2000',
+                'prijs' => 'required|numeric',
+                'image' => 'required|mimes:jpeg,png,bmp,tiff|max:4096'
+            ];
+            case 'PATCH':
+            return [
+                'titel' => 'required|string|max:60',
+                'beschrijving' => 'required|string|max:2000',
+                'prijs' => 'required|numeric',
+                'image' => 'required|mimes:jpeg,png,bmp,tiff|max:4096'
+            ];
+            break;
+            
+            default:
+            return [
+                'titel' => 'required|string|max:60|unique:products,titel',
+                'beschrijving' => 'required|string|max:2000',
+                'prijs' => 'required|numeric',
+                'image' => 'required|mimes:jpeg,png,bmp,tiff|max:4096'
+            ];
+            
+        }
     }
     public function messages()
     {
@@ -40,6 +60,7 @@ class ProductRequest extends FormRequest
             'titel.required' => 'Je moet een :attribute meegeven',
             'titel.string' => 'De :attribute mag alleen bestaan uit karakters.',
             'titel.max' => 'De :attribute mag niet langer zijn dan :max karakters.',
+            'titel.unique' => 'De :attribute bestaat al',
 
             //Beschrijving messages
             'beschrijving.required' => 'Je moet een :attribute meegeven',
