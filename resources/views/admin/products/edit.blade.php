@@ -31,16 +31,6 @@
             @endif
         </div>        
         <div class="form-group row">
-            {{--
-            Zorg ff dat de vorige categorie geselecteerd is -> zie if statement (gekopieerd van categorieen aanmaken)
-            <select id="sub" name="parent_id">
-                @foreach($categories as $categorie)
-                    @if($category->id != $categorie->id)
-                        <option value="{{ $categorie->id }}" {{ ($category->parent_id == $categorie->id) ? 'selected="selected"' : '' }}>{{ $categorie->categorie }}</option>
-                    @endif
-                @endforeach
-            </select>
-            --}}
             {{ Form::label('category_id', 'Categorie', ['class'=>'col-sm-2 col-form-label']) }}
             {{ Form::select('category_id', $categories, null, array('id' => 'id', 'class' => 'form-control input-sm')) }}
             @if($errors->has('category_id'))
