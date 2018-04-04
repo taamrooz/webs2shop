@@ -145,16 +145,21 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy()
     {
-        $extension = pathinfo($product->imageurl, PATHINFO_EXTENSION);
-        Storage::delete($product->id . $extension);
-        // Set module 'deleted'
+        if(!auth()->user()->isAdmin()){
+            return Redirect('/');
+        }
+
+        // Get product
+        $product = Product::find(request()->id);
+
+        // Set product 'deleted'
         $product->delete();
-        
+
         // Return to the page with a message
         Session::flash('msg', 'Product verwijderd');
-        return Redirect::to('/admin/producten');
+        return back();
     }
 
     public function filter() {
