@@ -51,7 +51,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'admin'], function() {
 	Route::post('producten/aanmaken', 'ProductController@store');
 	Route::get('producten/{product}/aanpassen', 'ProductController@edit');
 	Route::patch('producten/{product}', ['as' => 'admin.producten.update', 'uses' => 'ProductController@update']);
-	Route::post('products/verwijder', 'ProductController@destroy');
+	Route::post('producten/verwijder', 'ProductController@destroy');
 	//Categories
 	Route::get('categorieen', 'CategoryController@index');
 	Route::get('categorieen/aanmaken', 'CategoryController@create');

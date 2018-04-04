@@ -15,6 +15,11 @@
 					<h3>{{ $shorttitle }}</h3>
 					<p>{{ $short }}</p>
 					<div class="product_options">
+						<form method="post" action="/admin/producten/verwijder">
+							{{ csrf_field() }}
+							<input type="hidden" value="{{ $product->id }}" name="id">
+							<button type="submit">Verwijder</button>
+						</form>
 						<a class="inspect btn" href="{{ URL::to('/producten/'.$product->id ) }}">Bekijk</a>
 						<a class="inspect btn" href="{{ URL::to('/admin/producten/' . $product->id . '/aanpassen') }}">Aanpassen</a>
 					</div>
