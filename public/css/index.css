@@ -63,7 +63,6 @@ table{
     width: var(--centerWidth);
     padding: 10px 0 0 10px;
     text-decoration: blink;
-    color: blue;
 }
 
 .breadcrumb-item {
