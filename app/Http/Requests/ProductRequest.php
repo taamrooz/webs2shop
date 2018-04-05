@@ -39,7 +39,7 @@ class ProductRequest extends FormRequest
                 'titel' => 'required|string|max:60',
                 'beschrijving' => 'required|string|max:2000',
                 'prijs' => 'required|numeric',
-                'image' => 'required|mimes:jpeg,png,bmp,tiff|max:4096'
+                'image' => 'mimes:jpeg,png,bmp,tiff|max:4096'
             ];
             break;
             

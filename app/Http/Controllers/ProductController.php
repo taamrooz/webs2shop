@@ -127,14 +127,14 @@ class ProductController extends Controller
         $product->prijs = $request->prijs;
         $product->category_id = $request->category_id;
         $product->save();
-
-        $image = $request->file('image');
-        $imageFileName = $product->id . '.' . $image->getClientOriginalExtension();
-        $filePath = '/products/' . $imageFileName;
-        $s3 = Storage::disk('s3');
-        $s3->put($filePath, file_get_contents($image), 'public');
-        $product->update(['imageurl' => 'https://webs2shop.s3-eu-west-2.amazonaws.com' . $filePath]);
-
+        if($request->file('image') !== null){
+            $image = $request->file('image');
+            $imageFileName = $product->id . '.' . $image->getClientOriginalExtension();
+            $filePath = '/products/' . $imageFileName;
+            $s3 = Storage::disk('s3');
+            $s3->put($filePath, file_get_contents($image), 'public');
+            $product->update(['imageurl' => 'https://webs2shop.s3-eu-west-2.amazonaws.com' . $filePath]);
+        }
         Session::flash('msg', 'Product geüpdatet!');
         return Redirect::to('/admin/producten');
     }

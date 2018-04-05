@@ -4,14 +4,12 @@
 {{ Breadcrumbs::render('product', $product) }}
 <div class="row">
     <div class="card">
-        <img style="max-height: 400px; max-width: 900px;" class="card-img-top img-fluid show-banner" src="{{ asset('storage/'. $product->imageurl)}}"
+        <img style="max-height: 400px; max-width: 900px;" class="card-img-top img-fluid show-banner" src="{{ $product->imageurl}}"
         alt="">
         <div class="product_information">
             <h3 class="card-title">{{$product->titel}}</h3>
             <h4>
-                @isset($product->prijs)
-                {{ "$" . $product->prijs }}
-                @endisset
+                {{ "€" . $product->prijs }}
                 </h4>
                 <p style="max-width: 900px;">{{$product->beschrijving}}</p>
         </div>
